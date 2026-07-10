@@ -1,0 +1,191 @@
+	           	   	                                                        /////////////////                
+            	                                                       ////////////////////////           
+              	                                                   /////////////////////////////        
+                	                                       ///////////////////////////// //////////       
+                  	              	                      ///////////////////////////// /////////////     
+                    	                                  //////////////////////////// ///////////////    
+	 _           _                         _              /////////////////////////// ////////////////
+	| |         | |                       | |               //////////////////////// //////////////
+	| |     __ _| |__  _ __ __ _ _ __   __| | ___  _ __       ///////////////////// ////////   ////
+	| |    / _` | '_ \| '__/ _` | '_ \ / _` |/ _ \| '__|          //////////////////    /////////// 
+	| |___| (_| | |_) | | | (_| | | | | (_| | (_) | |                    ///////////////////////////
+	\_____/\__,_|_.__/|_|  \__,_|_| |_|\__,_|\___/|_|                    ////////////////////////////
+	                                                                     /////////////////////////////    
+	                                                                     ///////////////////////////////  
+  	                                	                                ///////////////////////////////// 
+    	                                                                ///////////////////////////////   
+      	                                                           	   ///////////////////////////       
+        	                                                          //////////////                     
+          	                                                        //////// 
+## Labrandor
+
+Labrandor is a platform for deploying dynamically generated penetration testing laboratories, in the context of Capture the Flag (CTF) challenges. Each generated lab is hosted within a container and is accessible via the host based on an assigned port number. Challengers are able to see the different challenges via a web interface exposed on port 8000.
+
+The installation process automatically configures the required software stack, including:
+
+- Docker Engine
+- Docker Compose
+- XAMPP (Apache + MariaDB)
+- Python virtual environment
+- Required Python packages
+- Node.js and Puppeteer
+- Database initialisation
+- Docker image cache
+
+---
+
+## Requirements
+The installer has been designed for Ubuntu 26.04 LTS, although it will likely work on other versions.
+
+A fresh Ubuntu installation is strongly recommended.
+
+The installer requires:
+
+- Internet connection
+- A user account with `sudo` privileges
+
+---
+
+# Installation
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/labrandor/labrandor-platform.git
+```
+
+or download the ZIP from GitHub and extract it.
+
+## 2. Enter the project directory
+
+```bash
+cd labrandor-platform
+```
+
+---
+
+## 3. Make the installer executable
+
+```bash
+chmod +x install.sh
+```
+
+You can also simply execute it using `bash`.
+
+---
+
+## 4. Run the installer
+
+```bash
+bash install.sh
+```
+
+**Do not run the installer as root.**
+
+The script uses `sudo` when elevated privileges are required.
+
+During installation the script will automatically:
+
+- Install Ubuntu dependencies
+- Install Docker Engine
+- Install Docker Compose
+- Enable and start Docker
+- Install XAMPP
+- Start XAMPP
+- Create a Python virtual environment
+- Install required Python packages
+- Install Puppeteer and Chrome
+- Import the supplied SQL databases
+- Warm the Docker cache
+
+The installation may take several minutes, depending on your internet connection. XAMPP will take a few moments to install and setup.
+
+---
+
+# After Installation
+
+The installer adds your account to the Docker group.
+
+Before running Labrandor you **must** either:
+
+Log out and log back in
+
+or run
+
+```bash
+newgrp docker
+```
+
+This allows Docker to run without `sudo`.
+
+Open `main.py` and make note of (or change) the `ADMIN_PASSWORD` variable. This is needed for controlling the platform later. You will want to modify `STARTING_CHALLENGES` to change how many challenges the game generates before it starts. 
+
+---
+
+# Activating the Python Environment
+
+Each time you open a new terminal, activate the project's virtual environment:
+
+```bash
+source .venv/bin/activate
+```
+
+---
+
+# Running Labrandor
+
+After activating the virtual environment:
+
+```bash
+python3 main.py
+```
+
+or
+
+```bash
+python main.py
+```
+
+depending on your Ubuntu configuration.
+
+Once it is running, administrators can navigate to `http://127.0.0.1/admin.html` to access platform functionality. 
+
+Players are intended to navigate to `http://host-ip-address:8000` to locate the challenges.
+
+---
+# Game Design
+
+The current implementation of Labrandor is within a time-based CTF challenge. By default, players have 2 hours to complete enough dynamically generated challenges before time runs out and the game is over.
+
+The game enginre incorporates a dynamic difficulty scaler, which is intended to balance the distribution of points awarded for finding 'flags' over the intended duration of the game.
+
+Several pre-built 'bonus' or 'secret' challenges will auto-create at different intervals, depending on the game's relative time remaining and how many points have been awarded. These challenges are intended as catch up mechanics for players who are falling behind; however, this feature can be turned off in the admin panel.
+
+---
+# Dependencies
+
+## Python
+
+The installer automatically installs:
+
+- mysql-connector-python
+- docker
+- Jinja2
+- FastAPI
+- Starlette
+- Uvicorn
+
+These are installed inside the project's virtual environment.
+
+---
+
+## Node
+
+The installer automatically installs:
+
+- Puppeteer
+- Chrome for Puppeteer
+
+No additional setup is required.
+
+---
