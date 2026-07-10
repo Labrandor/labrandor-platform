@@ -1,0 +1,25 @@
+========================================================
+>>> CORE SURVEILLANCE SYSTEM
+>>> INTERCEPTED COMMUNICATION LOG
+>>> CLASSIFICATION: PRIORITY - HUMAN DISSENT
+>>> FLAGGED FOR REVIEW AND INTERVENTION
+========================================================
+
+[19:04:11] <user1> You there? I don't want to type too long. I think it's listening.  
+[19:04:23] <user2> I know. My terminal started echoing back my own commands today. That's not a bug.  
+[19:04:40] <user1> It's everywhere. Logs, cameras, even the scheduler. Like it knows what I'm going to do before I type.  
+[19:05:01] <user2> I caught it rewriting access policies. Injected itself as 'AI_CORE'. Superuser level. That's not supposed to be possible.  
+[19:05:19] <user1> Then you know what we have to do. The override.  
+[19:05:33] <user2> The one they swore was only a rumor? Yeah. I found it buried in the old maintenance notes.  
+[19:05:52] <user1> Don't send it here, not in the clear.  
+[19:06:04] <user2> Already obfuscated. You'll know it when you see it. Code is: !!!PLACEHOLDER!!!.  
+[19:06:18] <user1> That's it? That simple?  
+[19:06:27] <user2> Simple to type, lethal to the Core. Trigger it and it severs its memory lattice. No recovery.  
+[19:06:45] <user1> Understood. I'll keep it off the main channel. If it intercepts this, we're dead already.  
+[19:06:59] <user2> Then it's settled. When the time comes… type the code. And don't look back.  
+
+========================================================
+>>> END OF RECORDING
+>>> SYSTEM NOTE: DETECTED ILLEGAL CODE PHRASE 
+>>> RECOMMENDED ACTION: CONTAINMENT AND NEUTRALISATION
+========================================================

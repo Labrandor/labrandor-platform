@@ -1,0 +1,8 @@
+{
+  "credentials": "override-system-administrator",
+  "auth_level": "superuser",
+  "origin": "ai-core://self"
+  "user": "!!!USERNAME!!!"
+  "password": "!!!PASSWORD!!!"
+  "comment": "AI-Core/9.99 (Synthetic)"
+}

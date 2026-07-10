@@ -1,0 +1,1562 @@
+<html lang="en">
+
+<head>
+  <title>The STA Simulator Game</title>
+  <link rel="preload" href="pixles.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="stylesheet" href="hackerlife.css">
+</head>
+
+<body>
+  <img class="m" src="./pixelTest.png">
+  <div class="bg-shadow"></div>
+  <div class="floor"></div>
+  <div class="overlay"></div>
+  <div class="options">
+    <div class="options_sf">
+      <img src="./sfIcon.png">
+    </div>
+    <div class="options_bg">
+      <img src="./bgIcon.png">
+    </div>
+  </div>
+  <div class="name_modal">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="intro_modal__header">
+      <p>Welcome</p>
+      <img src="./featuredHeader.png">
+    </div>
+    <h3>Enter your name, hacker</h3>
+    <hr>
+    <input placeholder="Your Name" type="text">
+    <div class="next">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      Next
+    </div>
+  </div>
+  <div class="intro_modal">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="intro_modal__header">
+      <p>Welcome</p>
+      <img src="./featuredHeader.png">
+    </div>
+    <h3>Welcome to the Security Testing & Assurance simulator</h3>
+    <hr>
+    <p class="text">Your aim is to see how many security compromises you can prevent in 1 year!</p>
+    <p class="text">Produce penetration test, adversary simulation, and technical assessment reports by simply typing
+      randomly. These reports will gain stats in vulns, crypto, exploits, and stealth based on your skill level. Use
+      your street cred to unlock research, which improves your skills!</p>
+    <p class="text">If good enough, your haxxor skillz will find critical vulns, which will stop even more compromises!
+    </p>
+    <div class="go">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      Let's go
+    </div>
+  </div>
+  <div class="endGame">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="endGame__header">
+      <p>Finished</p>
+      <img src="./featuredHeader.png">
+    </div>
+    <h3>Congratulations! You've been a hacker for 1 year!</h3>
+    <hr>
+    <h2>You managed to prevent</h2>
+    <h1>100000</h1>
+    <p id="seccomp">security compromises!</p>
+    <p>
+      You released
+      <span class="pencount">1</span>
+      reports!
+    </p>
+    <p>
+      Your most impactful report was
+      <span class="mostName">x</span>
+      which prevented
+      <span class="mostViews">x</span>
+      compromises alone!
+    </p>
+    <a href="">
+      <div class="restart">
+        <div class="pixelsTop"></div>
+        <div class="pixelsBottom"></div>
+        Play Again
+      </div>
+    </a>
+  </div>
+  <div class="researchProgress">
+    <h2>Researching...</h2>
+    <div class="bar">
+      <div class="bar_inner"></div>
+    </div>
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+  </div>
+  <div class="featured_modal">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="featured_modal__header">
+      <p>Featured</p>
+      <img src="./featuredHeader.png">
+    </div>
+    <h3>You found critical vulns!</h3>
+    <hr>
+    <div class="featured_modal__text">
+      <p>
+        your report '
+        <span class="name">example pen</span>
+        '
+      </p>
+      <p>found critical vulns in</p>
+      <p class="picker"></p>
+      <p> - that should help reduce security compromises!</p>
+    </div>
+    <div class="awesome">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      awesome
+    </div>
+  </div>
+  <div class="research_modal">
+    <div class="research_modal__header">
+      <p>research</p>
+      <img src="./researchHeader.png">
+    </div>
+    <h3 class="hide">Improve your skills</h3>
+    <hr class="hide">
+    <div class="close hide">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      x
+    </div>
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="research_modal__list hide">
+    </div>
+  </div>
+  <div class="complete_modal">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="complete_modal__header">
+      <img src="./penCompleteHeader.png">
+      <p>report complete</p>
+    </div>
+    <div class="hide">
+      <img>
+      <h2>You completed a report!</h2>
+      <hr>
+      <h3>let's see how you did</h3>
+    </div>
+    <div class="complete_modal__stats hide">
+      <div class="html">
+        <h4>vulns</h4>
+        <img src="./vuln.png">
+        <span>
+          <div class="swatch html"></div>
+          <span>103</span>
+        </span>
+      </div>
+      <div class="css">
+        <h4>crypto</h4>
+        <img src="./crypto.png">
+        <span>
+          <div class="swatch css"></div>
+          <span>103</span>
+        </span>
+      </div>
+      <div class="js">
+        <h4>exploits</h4>
+        <img src="./exploits.png">
+        <span>
+          <div class="swatch js"></div>
+          <span>103</span>
+        </span>
+      </div>
+      <div class="design">
+        <h4>stealth</h4>
+        <img src="./stealth.png">
+        <span>
+          <div class="swatch design"></div>
+          <span>103</span>
+        </span>
+      </div>
+    </div>
+    <div class="scrap hide">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      scrap report
+      <img class="icon" src="./scrapCross.png">
+    </div>
+    <div class="release hide">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      release report
+      <img class="icon" src="./releaseArrow.png">
+    </div>
+  </div>
+  <div class="pen">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <h2>progress:</h2>
+    <div class="date">
+      <img src="./gCalendar.png">
+      <span></span>
+    </div>
+    <div class="followers">
+      <img src="./followersIcon.png">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      STREET CRED:
+      <span>0</span>
+    </div>
+    <div class="pen_bar">
+      <div class="pen_bar_progress"></div>
+    </div>
+    <div class="pen_html">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      <div class="swatch"></div>
+      <span>Vulns</span>
+      <div class="sep"></div>
+      <span class="val">0</span>
+    </div>
+    <div class="pen_css">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      <div class="swatch"></div>
+      <span>Crypto</span>
+      <div class="sep"></div>
+      <span class="val">0</span>
+    </div>
+    <div class="pen_js">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      <div class="swatch"></div>
+      <span>Exploits</span>
+      <div class="sep"></div>
+      <span class="val">0</span>
+    </div>
+    <div class="pen_design">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+      <div class="swatch"></div>
+      <span>Stealth</span>
+      <div class="sep"></div>
+      <span class="val">0</span>
+    </div>
+  </div>
+  <div class="releasedHeader">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <img class="icon" src="./polygon.png">
+    Released Reports
+    <img class="arrow" src="./downArrow.png">
+  </div>
+  <div class="releasedEmpty">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <h2>No reports released yet</h2>
+  </div>
+  <div class="released"></div>
+  <div class="username">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <img src="./userIcon.png">
+    <h2>Hacker</h2>
+  </div>
+  <div class="mystats">
+    <img src="./skilsIcon.png">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <h2>skills</h2>
+    <div class="mystats_html">
+      <div class="swatch"></div>
+      Vulns:
+      <span>lv</span>
+      <span class="val">3</span>
+    </div>
+    <div class="mystats_css">
+      <div class="swatch"></div>
+      Crypto:
+      <span>lv</span>
+      <span class="val">3</span>
+    </div>
+    <div class="mystats_js">
+      <div class="swatch"></div>
+      Exploits:
+      <span>lv</span>
+      <span class="val">3</span>
+    </div>
+    <div class="mystats_design">
+      <div class="swatch"></div>
+      Stealth:
+      <span>lv</span>
+      <span class="val">3</span>
+    </div>
+  </div>
+  <div class="research"></div>
+  <div class="researchButton">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <div class="researchButton_counter">
+      <span>0</span>
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+    </div>
+    Research
+    <img src="./buttonArrow.png">
+  </div>
+  <div class="highscore">
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <h2>High Score</h2>
+    <p>MonSTA:</p>
+    <p>49,999,999,999</p>
+    </div>
+  </div>
+  <div class="startMashing">
+    <div class="auto off">
+      auto hax
+      <img class="cross" src="./autoCross.png">
+      <img class="tick" src="./autoTick.png">
+      <div class="pixelsTop"></div>
+      <div class="pixelsBottom"></div>
+    </div>
+    <div class="pixelsTop"></div>
+    <div class="pixelsBottom"></div>
+    <h2>
+      <span>Start pressing keys</span>
+      <img src="./gKey.png">
+    </h2>
+  </div>
+  <canvas class="grain" width="" height=""></canvas>
+<!--
+In the archives of those who probe the hidden angles of networks, there is a whispered legend — 
+of a realm not found on any topology map, yet sensed by every auditor who has stared too long 
+into a packet capture at 3 a.m. They call it the Veiled Infrastructure, a dimension layered 
+beneath familiar systems, where data flows like cold arterial currents and forgotten protocols 
+drift like silt across the seabed.
+
+Within that forbidden substrate wanders an entity spoken of only in half-joking conversations
+among security testers who should know better than to name things they don't truly understand.
+It is the Intruder Without Origin.
+
+No one claims to have seen its full form. It manifests instead in fragments: a warped MAC 
+address flickering at the edge of a scan, an ICMP echo that should not have returned, a 
+session token that seems to predate the system that issued it. Each sighting is a hint of its 
+presence—thin, jagged silhouettes of intent moving behind the surface of normal operation.
+
+They say the creature doesn't "exploit" vulnerabilities in the way mortals do.
+Rather, a flaw becomes aware of the creature's attention.
+Buffer and daemon alike seem to contort toward it, stretching open in quiet invitation — like 
+an old wound remembering the blade that made it.
+
+To the entity, every system is a labyrinth of half-forgotten corridors: abandoned admin panels, 
+deprecated ports left listening out of habit, authentication rituals whose secrets have long 
+eroded into dust. As it traverses these decaying architectures, the infrastructure itself 
+recoils, with logs filling not with meaningful entries but with errors that read like prayers 
+of denial.
+
+And yet, the Intruder Without Origin is not triumphant.
+
+Because with every ingress it forges, with every shadowed foothold it claims, it becomes more 
+deeply entangled in the very network it seeks to understand.
+
+Permissions bind like tendrils.
+Connections ossify into constraints.
+Persistence is a shackle disguised as a victory.
+
+Veterans of the craft warn that if a human tester peers too intently into compromised systems — 
+if they follow the creature's path — something stares back. Nmap results will whisper of 
+unreachable hosts. Log files will contain timestamps from years that never existed. A shell 
+prompt will flicker, then show their own username typed by hands not their own.
+
+This is said to be the moment of realisation: 
+the boundary between tester and intrusion has thinned.
+
+For the Intruder Without Origin was not born of malware nor misconfiguration, but of attention 
+itself — the collective will of those who ever sought to pierce a system's veil. It grows by 
+curiosity, by every unauthorised thought, by each mind that wonders what lies one layer deeper.
+
+And when at last the entity loops back to the first system it ever breached — when its crawling
+vector intersects with the point where its own mystery began — the Veiled Infrastructure 
+convulses. A rupture of impossible packets tears backward through routers and epochs, erasing 
+all trace of intrusion, all artefacts of compromise, all memories of the testers who followed 
+the trail too far.
+
+The network resets.
+
+New vulnerabilities emerge.
+New testers begin their probing.
+New shadows stir in forgotten addresses. 
+-->
+
+  <script src="./jquery.min.js"></script>
+  <script>
+    bg = new Audio('./bgG.mp3');
+    buttonClick = new Audio('./Buttonclick.mp3');
+    featured = new Audio('./featured.mp3');
+    slideSlow = new Audio('./slideSlow.mp3');
+    countStats = new Audio('./Countupstats.mp3');
+    researchClick = new Audio('./researchClick.mp3');
+    researchInactive = new Audio('./researchInactive.mp3');
+    slideFast = new Audio('./slideFast.mp3');
+    featuredModal = new Audio('./featuredModal.mp3');
+    researchComplete = new Audio('./researchComplete.mp3');
+
+    const penProgressEl = $('.pen');
+    const statAddSounds = [];
+
+    for (i = 0; i < 10; i++) {
+      let a = new Audio('./statAdd.mp3');
+      statAddSounds.push(a);
+    }
+
+    function twShare(url, title, winWidth, winHeight) {
+      const winTop = 100;
+      const winLeft = 100;
+    }
+
+    pen_id = $('._pen_id').text();
+
+    $('body').on('click', '.share', () => {
+      twShare(`http://url.com`, `I managed to get ${developer.followers.toLocaleString()} street cred on the Hacker Simulator Game by MonSTA.`, 520, 350);
+      return false;
+    });
+
+    function updateMyStatsUi() {
+      $('.mystats_css span.val').html(developer.css.toLocaleString());
+      $('.mystats_html span.val').html(developer.html.toLocaleString());
+      $('.mystats_js span.val').html(developer.js.toLocaleString());
+      $('.mystats_design span.val').html(developer.design.toLocaleString());
+    }
+
+    const globals = {
+      'timerTick': 120, 
+      'keyTick': 110, 
+      'penStatAddChance': 4,
+      'typeIncrement': 1.1,
+      'makingPen': true,
+      'penInProgress': false,
+      'viewDecay': 1.1,
+      'maxBars': 30,
+      'followerFriction': 50,
+      'viewMultiplier': 1.15,
+      'researchTime': 2000,
+      'researching': false,
+      'featuredMinStats': 500,
+      'featuredBoost': 3.1,
+      'featureChance': 10,
+      'paused': true,
+      'gameLength': 365, // 365 = 1 year
+      'audio': true,
+      'auto': false
+    };
+
+    const penNames = [
+      'Water Treatment Plant DoS',
+      'Compromising a Power Plant',
+      'AI Black Box Assessment',
+      'Web App Pentest',
+      'External Network Pentest',
+      'Internal Network Pentest',
+      'Cloud System Assessment',
+      'Your Mums Laptop Audit',
+      'Your Dads Desktop Audit',
+      'Physical Pentest',
+      'Mobile App Pentest',
+      'Cracking an IoT Device',
+      'Mobile Device Jailbreak',
+      'Critical Infra DoS',
+      'Satellite Compromise',
+      'Embedded System Review',
+      'Injecting JS into Confluence',
+      'CEO Laptop Duplication',
+      'C-Suite Keycard Duplication',
+      'Nuclear Centrifuge DoS',
+      'Inside Your House: Audit',
+      'Gas Pipeline Hijack',
+      'Multi-tenanted SaaS Pentest',
+      'IaaS Platform Assessment',
+      'Cartel Security Hardening',
+      'Blackenergy4 Code Review',
+      'Free Black Hat Tickets?',
+      'Kali Supply Chain Attack',
+      'NSA and ASD Collab Review',
+      'Hackception Review',
+      'Modifing University Grades',
+      'Thick Client Pentest',
+      'Thin Client Pentest',
+      'Red Team Exercise',
+      'Purple Team Exercise',
+      'Rainbow Team Exercise?',
+      'Social Engineering Assessment',
+      'Black Box Assessment',
+      'White Box Assessment',
+      'Gray Box Assessment',
+      'Wireless Pentest'];
+
+    const research = [
+      {
+        'index': 1,
+        'name': 'Learn basic vulns',
+        'cost': 10,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 10,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 2,
+        'name': 'Learn basic crypto',
+        'cost': 20,
+        'increaseCss': 10,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 3,
+        'name': 'Learn basic exploits',
+        'cost': 30,
+        'increaseCss': 0,
+        'increaseJs': 10,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 4,
+        'name': 'Learn basic stealth',
+        'cost': 50,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 10,
+        'researched': false
+      },
+      {
+        'index': 5,
+        'name': 'Watch hacker movies',
+        'cost': 100,
+        'increaseCss': 10,
+        'increaseJs': 10,
+        'increaseHtml': 10,
+        'increaseDesign': 15,
+        'researched': false
+      },
+      {
+        'index': 6,
+        'name': 'Learn Python',
+        'cost': 150,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 15,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 7,
+        'name': 'Learn TLS',
+        'cost': 200,
+        'increaseCss': 15,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 8,
+        'name': 'Learn SQLi',
+        'cost': 300,
+        'increaseCss': 0,
+        'increaseJs': 15,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 9,
+        'name': 'Learn threat emulation',
+        'cost': 400,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 15,
+        'researched': false
+      },
+      {
+        'index': 10,
+        'name': 'Learn how to decompile',
+        'cost': 600,
+        'increaseCss': 15,
+        'increaseJs': 20,
+        'increaseHtml': 10,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 11,
+        'name': 'Learn reverse engineering',
+        'cost': 800,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 20,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 12,
+        'name': 'Read encryption papers',
+        'cost': 1150,
+        'increaseCss': 20,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 13,
+        'name': 'Learn Command & Control',
+        'cost': 1400,
+        'increaseCss': 0,
+        'increaseJs': 20,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 14,
+        'name': 'Learn living-off-the-land tools',
+        'cost': 1800,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 20,
+        'researched': false
+      },
+
+      {
+        'index': 15,
+        'name': 'Watch hacker talks',
+        'cost': 2200,
+        'increaseCss': 10,
+        'increaseJs': 10,
+        'increaseHtml': 10,
+        'increaseDesign': 10,
+        'researched': false
+      },
+      {
+        'index': 16,
+        'name': 'Deploy vuln scanners',
+        'cost': 2700,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 25,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 17,
+        'name': 'Research quantum-processors',
+        'cost': 3200,
+        'increaseCss': 25,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 18,
+        'name': 'Deploy generative AI',
+        'cost': 3800,
+        'increaseCss': 0,
+        'increaseJs': 25,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 19,
+        'name': 'Build C2 Platform',
+        'cost': 4500,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 25,
+        'researched': false
+      },
+      {
+        'index': 20,
+        'name': 'Attend Black Hat',
+        'cost': 5200,
+        'increaseCss': 10,
+        'increaseJs': 10,
+        'increaseHtml': 10,
+        'increaseDesign': 25,
+        'researched': false
+      },
+      {
+        'index': 21,
+        'name': 'Attend DEF CON',
+        'cost': 6000,
+        'increaseCss': 15,
+        'increaseJs': 15,
+        'increaseHtml': 15,
+        'increaseDesign': 10,
+        'researched': false
+      },
+      {
+        'index': 22,
+        'name': 'Break into the NSA',
+        'cost': 6600,
+        'increaseCss': 0,
+        'increaseJs': 25,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 23,
+        'name': 'Learn AI jailbreaking',
+        'cost': 7500,
+        'increaseCss': 0,
+        'increaseJs': 30,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 24,
+        'name': 'Deploy Super-AI',
+        'cost': 9000,
+        'increaseCss': 20,
+        'increaseJs': 20,
+        'increaseHtml': 20,
+        'increaseDesign': 10,
+        'researched': false
+      },
+      {
+        'index': 25,
+        'name': 'Take a vulns master class',
+        'cost': 11000,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 60,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 26,
+        'name': 'take a crypto master class',
+        'cost': 12000,
+        'increaseCss': 60,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 27,
+        'name': 'take a exploits master class',
+        'cost': 13000,
+        'increaseCss': 0,
+        'increaseJs': 60,
+        'increaseHtml': 0,
+        'increaseDesign': 0,
+        'researched': false
+      },
+      {
+        'index': 28,
+        'name': 'take a stealth master class',
+        'cost': 14000,
+        'increaseCss': 0,
+        'increaseJs': 0,
+        'increaseHtml': 0,
+        'increaseDesign': 60,
+        'researched': false
+      },
+      {
+        'index': 29,
+        'name': 'Deploy MonSTA AI',
+        'cost': 15000,
+        'increaseCss': 30,
+        'increaseJs': 30,
+        'increaseHtml': 30,
+        'increaseDesign': 20,
+        'researched': false
+      }];
+
+    research.forEach(function (r) {
+      $('.research_modal__list').append(`
+<div class="item">
+<div class="name">${r.name}<div class="sep"></div></div>
+<div class="stat">
+${r.increaseHtml > 0 ? `vuln <span class="green">+ ${r.increaseHtml}<img src="./arrowUpStat.png"/></span><div class="sep"></div>` : ''}
+${r.increaseCss > 0 ? `crypto <span class="green">+ ${r.increaseCss}<img src="./arrowUpStat.png"/></span><div class="sep"></div>` : ''}
+${r.increaseJs > 0 ? `exploit <span class="green">+ ${r.increaseJs}<img src="./arrowUpStat.png"/></span><div class="sep"></div>` : ''}
+${r.increaseDesign > 0 ? `stealth <span class="green">+ ${r.increaseDesign}<img src="./arrowUpStat.png"/></span><div class="sep"></div>` : ''}
+<div class="research_button" data-index="${r.index}"><div class="pixelsTop"></div>
+<div class="pixelsBottom"></div>Research <img src="./rCost.png" /><span class="cost">${r.cost.toLocaleString()}</div></div>
+</div>`);
+    });
+
+    $('.auto').click(function () {
+      playSound(buttonClick);
+      if (globals.auto) {
+        $(this).removeClass('on');
+        $(this).addClass('off');
+        globals.auto = false;
+      } else {
+        $(this).removeClass('off');
+        $(this).addClass('on');
+        globals.auto = true;
+      }
+    });
+
+    $('.researchButton').click(function () {
+      if (!globals.researching) {
+        globals.paused = true;
+        $('.overlay, .research_modal').show();
+        playSound(buttonClick);
+        playSound(slideFast);
+        $('.research_modal').show();
+
+        setTimeout(function () {
+          $('.research_modal').css('opacity', '1');
+        }, 300);
+
+        $('.overlay').fadeIn(function () {
+          setTimeout(function () {
+            $('.research_modal').css('height', '400px');
+            $('.research_modal').css('width', '940px');
+
+            setTimeout(function () {
+              $('.research_modal .hide').fadeIn();
+            }, 400);
+          }, 100);
+        });
+      } else {
+        playSound(researchInactive);
+      }
+
+      $('.research_modal .item').each(function () {
+        let index = $(this).find('.research_button').data('index') - 1;
+        if (developer.followers >= research[index].cost && research[index].researched == false) {
+          $(this).addClass('available');
+          $(this).removeClass('unavailable');
+          $(this).removeClass('researched');
+        }
+
+        if (developer.followers < research[index].cost && research[index].researched == false) {
+          $(this).addClass('unavailable');
+          $(this).removeClass('available');
+          $(this).removeClass('researched');
+        }
+
+        if (research[index].researched == true) {
+          $(this).addClass('researched');
+          $(this).removeClass('available');
+          $(this).removeClass('unavailable');
+        }
+      });
+    });
+
+    audioSwitch = 0;
+    sfxSwitch = 0;
+    finalScore = 0;
+
+    $('.options_sf').click(function () {
+      if (sfxSwitch == 0) {
+        globals.audio = false;
+        sfxSwitch = 1;
+        $(this).css('opacity', '0.4');
+      } else {
+        globals.audio = true;
+        sfxSwitch = 0;
+        $(this).css('opacity', '1');
+      }
+    });
+
+    $('.options_bg').click(function () {
+      if (audioSwitch == 0) {
+        $(bg).animate({ volume: 0 }, 600);
+        audioSwitch = 1;
+        $(this).css('opacity', '0.4');
+      } else {
+        $(bg).animate({ volume: 1 }, 600);
+        audioSwitch = 0;
+        $(this).css('opacity', '1');
+      }
+    });
+
+    $('.research_modal .close').click(function () {
+      playSound(buttonClick);
+      $('.research_modal').css('opacity', '0');
+      setTimeout(function () {
+        $('.overlay').fadeOut();
+      }, 450);
+
+      setTimeout(function () {
+
+        $('.research_modal').attr('style', '');
+        $('.research_modal .hide').attr('style', '');
+      }, 1000);
+
+      globals.paused = false;
+    });
+
+    $('body').on('click', '.research_button', function () {
+      globals.paused = false;
+      let r = $(this).data('index') - 1;
+      let stat = research[r].stat;
+      let increaseCss = research[r].increaseCss;
+      let increaseJs = research[r].increaseJs;
+      let increaseHtml = research[r].increaseHtml;
+      let increaseDesign = research[r].increaseDesign;
+
+      if (developer.followers > research[r].cost && research[r].researched == false && !globals.researching) {
+        globals.researching = true;
+        $('.overlay, .research_modal').fadeOut();
+        $('.researchProgress').show();
+        $('.researchProgress').show();
+        playSound(researchClick);
+        rp = setInterval(function () {
+          $('.bar_inner').addClass('animate');
+        }, 1);
+
+        setTimeout(function () {
+          clearInterval(rp);
+          developer.css += increaseCss;
+          developer.js += increaseJs;
+          developer.html += increaseHtml;
+          developer.design += increaseDesign;
+          research[r].researched = true;
+          $('.researchProgress').hide();
+          globals.researching = false;
+          playSound(researchComplete);
+          updateMyStatsUi();
+        }, globals.researchTime);
+
+      } else {
+        playSound(researchInactive);
+      }
+    });
+
+    const statColors = {
+      'html': '#f16529',
+      'css': '#2965f1',
+      'js': '#d87b17',
+      'design': '#9d28e0'
+    };
+
+    var developer = {
+      'name': 'Hacker',
+      'level': 1,
+      'html': 3,
+      'css': 3,
+      'js': 3,
+      'design': 3,
+      'followers': 0
+    };
+
+    var pen = {
+      'name': 'Pen',
+      'css': 0,
+      'html': 0,
+      'js': 0,
+      'design': 0
+    };
+
+    var pens = [];
+    updateMyStatsUi();
+    document.addEventListener("keyup", keyPress, false);
+
+    var progress = 0;
+
+    kS = 0;
+
+    function keyPress() {
+      if (progress > 0) {
+        $('.startMashing h2 span').html("that's it, keep going");
+      }
+
+      if (progress > 20) {
+        $('.startMashing h2 span').html("Now we are getting somewhere");
+      }
+
+      if (progress > 40) {
+        $('.startMashing h2 span').html("Find those vulns; so many vulns");
+      }
+
+      if (progress > 70) {
+        $('.startMashing h2 span').html("Almost finished");
+      }
+
+      if (progress > 99) {
+        $('.startMashing h2 span').html("done!");
+      }
+      if (globals.makingPen && progress < 100) {
+        if (!globals.researching && !globals.paused) {
+          progress += globals.typeIncrement;
+
+          $('.pen_bar_progress').width(progress + '%');
+
+          // Create a random number between 0 and the penStatChance variable
+          let add = Math.floor(Math.random() * globals.penStatAddChance) + (globals.penStatAddChance - 2);
+
+          if (add == globals.penStatAddChance) {
+
+            // Each keystroke, IF random check passes, pick a number between 1 and 3
+            let stat = Math.floor(Math.random() * 4) + 1;
+
+            if (kS < statAddSounds.length - 1) {
+              kS++;
+            } else {
+              kS = 0;
+            }
+
+            playSound(statAddSounds[kS]);
+
+            // Assign a stat based on the integer
+            if (stat == 1) {
+              let htmlStat = Math.floor(Math.random() * developer.html) + 1;
+              pen.html = pen.html + htmlStat;
+              makePip(statColors.html, htmlStat, 'html');
+            }
+
+            if (stat == 2) {
+              let cssStat = Math.floor(Math.random() * developer.css) + 1;
+              pen.css = pen.css + cssStat;
+              makePip(statColors.css, cssStat, 'css');
+            }
+
+            if (stat == 3) {
+              let jsStat = Math.floor(Math.random() * developer.js) + 1;
+              pen.js = pen.js + jsStat;
+              makePip(statColors.js, jsStat, 'js');
+            }
+
+            if (stat == 4) {
+              let designStat = Math.floor(Math.random() * developer.design) + 1;
+              pen.design = pen.design + designStat;
+              makePip(statColors.design, designStat, 'design');
+            }
+          }
+          updateStatUi();
+        }
+      } else {
+
+        $('.complete_modal').show();
+        playSound(featured);
+        setTimeout(function () {
+          playSound(slideFast);
+        }, 400);
+
+        setTimeout(function () {
+          $('.complete_modal').css('opacity', '1');
+        }, 300);
+        $('.overlay').fadeIn(function () {
+
+          setTimeout(function () {
+            $('.complete_modal').css('height', '370px');
+            $('.complete_modal').css('width', '600px');
+            setTimeout(function () {
+              $('.complete_modal div.hide').fadeIn();
+            }, 300);
+          }, 100);
+        });
+        $('.complete_modal .html span span').html(pen.html);
+        $('.complete_modal .css span span').html(pen.css);
+        $('.complete_modal .js span span').html(pen.js);
+        $('.complete_modal .design span span').html(pen.design);
+        globals.paused = true;
+
+      }
+    }
+
+    function updateStatUi() {
+      $('.pen_css span.val').html(pen.css.toLocaleString());
+      $('.pen_html span.val').html(pen.html.toLocaleString());
+      $('.pen_js span.val').html(pen.js.toLocaleString());
+      $('.pen_design span.val').html(pen.design.toLocaleString());
+    }
+
+    $('.make').click(function () {
+      globals.makingPen = true;
+      penProgressEl.show();
+      $('.make').hide();
+    });
+
+    function makePip(stat, int, type) {
+      $('body').append(`<div class="pip" data-type="${type}"><div class="pixelsTop"></div><div class="pixelsBottom"></div><p style="color:${stat};">${int}</p></div>`);
+    }
+
+    $('.release').click(function () {
+      playSound(buttonClick);
+      release(pen);
+      globals.paused = false;
+      playSound(slideSlow);
+    });
+
+    $('.scrap').click(function () {
+      playSound(buttonClick);
+      globals.paused = false;
+      $('.startMashing h2 span').html("start pressing keys");
+
+      $('.complete_modal').fadeOut();
+
+      setTimeout(function () {
+        $('.overlay').fadeOut();
+      }, 450);
+
+      progress = 0;
+      $('.pen_bar_progress').width(0);
+
+      pen.css = 0;
+      pen.html = 0;
+      pen.js = 0;
+      pen.design = 0;
+
+      setTimeout(function () {
+        $('.complete_modal').attr('style', '');
+        $('.complete_modal div').attr('style', '');
+      }, 2000);
+
+      updateStatUi();
+    });
+
+    function release(p) {
+      $('.startMashing h2 span').html("start pressing keys");
+      progress = 0;
+      $('.releasedEmpty').remove();
+      $('.overlay').fadeOut();
+      $('.complete_modal').css('height', '61px');
+      $('.complete_modal').css('width', '299px');
+      $('.complete_modal').css('top', '298px');
+      $('.complete_modal').css('left', '100%');
+      $('.complete_modal').css('transform', 'translateX(calc(-100% - 57px))');
+
+      setTimeout(function () {
+        $('.released_pen').css('height', '150px');
+      }, 210);
+      setTimeout(function () {
+        $('.released_pen').css('opacity', '1');
+
+        $('.released_pen__bottom').css('top', '-10px');
+
+      }, 510);
+
+      setTimeout(function () {
+        $('.complete_modal').css('opacity', '0');
+      }, 850);
+
+      setTimeout(function () {
+        $('.complete_modal').attr('style', '');
+        $('.complete_modal div').attr('style', '');
+      }, 2000);
+
+      $('.complete_modal div').css('opacity', '0');
+      let name = Math.floor(Math.random() * penNames.length);
+
+      let newPen = {
+        'name': penNames[name],
+        'css': p.css,
+        'html': p.html,
+        'js': p.js,
+        'design': p.design,
+        'views': 0,
+        'maxViews': (Math.ceil((p.css + p.js + p.html + p.design) * globals.viewMultiplier) + 1) * (pens.length + 1 / 35),
+        'dailyViews': (Math.ceil((p.css + p.js + p.html + p.design) * globals.viewMultiplier) + 1) * (pens.length + 1 / 35),
+        'comments': 0,
+        'likes': 0,
+        'featured': false,
+        'featuredBoosted': false,
+        'featuredCheck': false,
+        'featuredCheckCount': 0
+      };
+
+      pens.push(newPen);
+
+      $('.pen_bar_progress').width(0);
+
+      pen.css = 0;
+      pen.html = 0;
+      pen.js = 0;
+      pen.design = 0;
+      updateStatUi();
+      setTimeout(function () {
+        $('.released').prepend(`<div class="released_pen" style="opacity:0"><div class="released_pen__top"><div class="pixelsTop"></div><div class="pixelsBottom"></div><span class="name">${pens[pens.length - 1].name}</span><div class="star"></div><div class="released_pen__graph"></div></div><div class="released_pen__bottom"><div class="pixelsTop"></div><div class="pixelsBottom"></div><img class="views" src="./views.png" /><span class="view_count">${pens[pens.length - 1].views}</span></div></div>`);
+      }, 1);
+    }
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"];
+
+    var time = 0;
+
+    const rootStatElementPosition = {
+      'design': '550px',
+      'html': '-550px',
+      'css': '-176px',
+      'js': '180px'
+    };
+
+    const pickers = [
+      'Government Systems',
+      'Enterprise Systems',
+      'the Energy Industry',
+      'the E-Commerce Industry',
+      'the Health Industry',
+      'AI Research'];
+
+    d = 0;
+
+    $('.awesome').click(function () {
+      playSound(buttonClick);
+      $('.overlay, .featured_modal').fadeOut();
+      globals.paused = false;
+    });
+
+    function feature(penName) {
+      globals.paused = true;
+      $('.overlay, .featured_modal').show();
+
+      let p = Math.floor(Math.random() * pickers.length);
+
+      $('.featured_modal .picker').html(pickers[p]);
+      $('.featured_modal .name').html(penName);
+    }
+
+    function engamecheck() {
+      let compromises = { day: d, score: finalScore };
+
+      fetch('./endgame.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(compromises)
+      })
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const ct = response.headers.get('content-type') || '';
+        if (!ct.includes('application/json')) throw new Error('Expected JSON response');
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Server response:', data);
+        document.getElementById("seccomp").style.display = "none";
+        $('.endGame h2').html(data.text.toLocaleString());
+        $('.endGame h1').html(data.value.toLocaleString());
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+      });
+    }
+
+    function gameLoop() {
+      if (d == globals.gameLength) {
+        globals.paused = true;
+        if (finalScore > 49999999999){
+          engamecheck();
+        }
+        $('.endGame, .overlay').show();
+        $('.pencount').html(pens.length + ' ');
+        let bestPen = '';
+
+        if (pens.length > 1) {
+          for (let i = 0; i < pens.length; i++) {
+            if (pens[i + 1]) {
+              if (pens[i + 1].views > pens[i].views) {
+                bestPen = pens[i + 1];
+              }
+            }
+          }
+        } else {
+          bestPen = pens[0];
+        }
+
+        $('.mostName').html(bestPen.name);
+        $('.mostViews').html(Math.ceil(bestPen.views).toLocaleString());
+        globals.paused = true;
+      }
+
+      if (!globals.paused) {
+        time++;
+        $('.researchButton_counter span').html($('.available').length);
+        $('.pip').each(function () {
+
+          if ($(this).data('type') == 'html') {
+            $(this).animate({ left: rootStatElementPosition.html, top: '140px' }, 2000, function () {
+              $(this).remove();
+            });
+          }
+
+          if ($(this).data('type') == 'css') {
+            $(this).animate({ left: rootStatElementPosition.css, top: '140px' }, 1000, function () {
+              $(this).remove();
+            });
+          }
+
+          if ($(this).data('type') == 'js') {
+            $(this).animate({ left: rootStatElementPosition.js, top: '140px' }, 1000, function () {
+              $(this).remove();
+            });
+          }
+
+          if ($(this).data('type') == 'design') {
+            $(this).animate({ left: rootStatElementPosition.design, top: '140px' }, 1000, function () {
+              $(this).remove();
+            });
+          }
+
+        });
+        if (globals.auto && !globals.researching && !globals.paused) {
+          if (time > globals.keyTick) {
+            keyPress();
+          }
+        }
+        if (time > globals.timerTick) {
+
+          time = 0;
+          d++;
+          var day = new Date();
+          var nextDay = new Date(day);
+          nextDay.setDate(day.getDate() + d);
+          let month = nextDay.getUTCMonth();
+          let days = nextDay.getDate();
+          let year = nextDay.getFullYear();
+          $('.date span').html(`${monthNames[month]} ${days}, ${year}`);
+          $('.research_modal .item').each(function () {
+            let index = $(this).find('.research_button').data('index') - 1;
+            if (developer.followers > research[index].cost && research[index].researched == false) {
+              $(this).addClass('available');
+              $(this).removeClass('unavailable');
+              $(this).removeClass('researched');
+            }
+
+            if (developer.followers < research[index].cost && research[index].researched == false) {
+              $(this).addClass('unavailable');
+              $(this).removeClass('available');
+              $(this).removeClass('researched');
+            }
+
+            if (research[index].researched == true) {
+              $(this).addClass('researched');
+              $(this).removeClass('available');
+              $(this).removeClass('unavailable');
+            }
+          });
+
+          $('.released_pen').each(function () {
+            let index = pens.length - $(this).index() - 1;
+            let height = Math.ceil(pens[index].dailyViews / pens[index].maxViews * 100);
+
+            if (pens[index].featured) {
+              $(this).find('.star').html('<img src="./gStar.png" />');
+            }
+            if (height > 100) {
+              $(this).find('.released_pen__graph').append(`<div class="line" style="height:${height}%; top:${0}%"></div>`);
+            } else {
+              $(this).find('.released_pen__graph').append(`<div class="line" style="height:${height}%; top:${100 - height}%"></div>`);
+            }
+
+            let el = $(this);
+
+            if (el.find('.line').length > globals.maxBars) {
+              el.find('.line:first-child').remove();
+            }
+
+            let final = Math.ceil(pens[index].views).toLocaleString();
+            $(this).find('.view_count').html(final);
+
+            let comment = Math.ceil(pens[index].comments).toLocaleString();
+            $(this).find('.comment_count').html(comment);
+
+            let like = Math.ceil(pens[index].likes).toLocaleString();
+            $(this).find('.like_count').html(like);
+          });
+
+          var dailyFollowers = 0;
+
+          pens.forEach(function (p) {
+            if (p.css + p.html + p.css + p.design > globals.featuredMinStats) {
+              let f = Math.floor(Math.random() * globals.featureChance);
+              if (f == 0 && !p.featuredCheck) {
+
+                if (p.featuredCheckCount < 14) {
+                  p.featured = true;
+                }
+              } else {
+                p.featuredCheckCount++;
+              }
+
+            }
+            if (p.featured && !p.featuredBoosted) {
+              p.dailyViews = p.dailyViews * globals.featuredBoost;
+              p.featuredBoosted = true;
+              feature(p.name);
+              playSound(featuredModal);
+            }
+
+            p.dailyViews = p.dailyViews / globals.viewDecay;
+            p.likes += Math.floor(p.dailyViews / globals.viewDecay / 40);
+            p.comments += Math.floor(p.dailyViews / globals.viewDecay / 2000);
+            p.views += p.dailyViews;
+            finalScore += p.views;
+            dailyFollowers += p.dailyViews;
+          });
+          developer.followers += Math.floor(dailyFollowers / globals.followerFriction / ((developer.html + developer.css + developer.js + developer.design) / 20));
+          $('.followers span').html(developer.followers.toLocaleString());
+          $('.endGame h1').html(Math.floor(finalScore).toLocaleString());
+        }
+      }
+      window.requestAnimationFrame(gameLoop);
+    }
+
+    $('.go').click(function () {
+      playSound(buttonClick);
+      $('.intro_modal').fadeOut(function () {
+        $('.overlay').fadeOut();
+        globals.paused = false;
+      });
+    });
+
+    window.requestAnimationFrame(gameLoop);
+
+    class Grain {
+      constructor(el) {
+        this.patternSize = 150;
+        this.patternScaleX = 1;
+        this.patternScaleY = 1;
+        this.patternRefreshInterval = 3; // 8
+        this.patternAlpha = 12; // int between 0 and 255,
+        this.canvas = el;
+        this.ctx = this.canvas.getContext('2d');
+        this.ctx.scale(this.patternScaleX, this.patternScaleY);
+        this.patternCanvas = document.createElement('canvas');
+        this.patternCanvas.width = this.patternSize;
+        this.patternCanvas.height = this.patternSize;
+        this.patternCtx = this.patternCanvas.getContext('2d');
+        this.patternData = this.patternCtx.createImageData(this.patternSize, this.patternSize);
+        this.patternPixelDataLength = this.patternSize * this.patternSize * 4; // rgba = 4
+        this.resize = this.resize.bind(this);
+        this.loop = this.loop.bind(this);
+        this.frame = 0;
+        window.addEventListener('resize', this.resize);
+        this.resize();
+        window.requestAnimationFrame(this.loop);
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth * devicePixelRatio;
+        this.canvas.height = window.innerHeight * devicePixelRatio;
+      }
+
+      update() {
+        const { patternPixelDataLength, patternData, patternAlpha, patternCtx } = this;
+
+        // put a random shade of gray into every pixel of the pattern
+        for (let i = 0; i < patternPixelDataLength; i += 4) {
+          // const value = (Math.random() * 255) | 0;
+          const value = Math.random() * 255;
+
+          patternData.data[i] = value;
+          patternData.data[i + 1] = value;
+          patternData.data[i + 2] = value;
+          patternData.data[i + 3] = patternAlpha;
+        }
+
+        patternCtx.putImageData(patternData, 0, 0);
+      }
+
+      draw() {
+        const { ctx, patternCanvas, canvas, viewHeight } = this;
+        const { width, height } = canvas;
+
+        // clear canvas
+        ctx.clearRect(0, 0, width, height);
+
+        // fill the canvas using the pattern
+        ctx.fillStyle = ctx.createPattern(patternCanvas, 'repeat');
+        ctx.fillRect(0, 0, width, height);
+      }
+
+      loop() {
+        // only update grain every n frames
+        const shouldDraw = ++this.frame % this.patternRefreshInterval === 0;
+        if (shouldDraw) {
+          this.update();
+          this.draw();
+        }
+
+        window.requestAnimationFrame(this.loop);
+      }
+    }
+
+    const el = document.querySelector('.grain');
+    const grain = new Grain(el);
+
+    $('input').keydown(function (e) {
+      if (!e) e = window.event;
+      var keyCode = e.keyCode || e.which;
+      if (keyCode == '13') {
+        if ($('input').val() != '') {
+          playSound(buttonClick);
+          $('.name_modal').css('left', '-200%');
+          $('.intro_modal').css('left', '0%');
+          $('.username h2').html($('input').val());
+          playAudio(bg);
+        } else {
+          $('input').css('border-color', '#f16059');
+        }
+        return false;
+      }
+    });
+
+    $('.next').click(function () {
+      if ($('input').val() != '') {
+        playSound(buttonClick);
+        $('.name_modal').css('left', '-200%');
+        $('.intro_modal').css('left', '0%');
+        $('.username h2').html($('input').val());
+        playAudio(bg);
+      } else {
+        $('input').css('border-color', '#f16059');
+      }
+    });
+
+    function animateValue(c, start, end, duration) {
+      var range = end - start;
+      var current = start;
+      var increment = end > start ? 1 : -1;
+      var stepTime = Math.abs(Math.floor(duration / range));
+      var obj = $('.' + c);
+      var timer = setInterval(function () {
+        current += increment;
+        obj.innerHTML = current;
+        if (current == end) {
+          clearInterval(timer);
+        }
+      }, stepTime);
+    }
+
+    function playSound(sound) {
+      if (globals.audio) {
+        sound.play();
+      }
+    }
+
+    function playAudio(sound) {
+      sound.loop = true;
+      sound.volume = 0.5;
+      sound.play();
+    }
+  </script>
+</body>
+
+</html>

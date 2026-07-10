@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CORRUPT.MEMORY.ARRAY</title>
+    <link rel="stylesheet" href="css.css">
+    <!-- <script>window.console = window.console || function(t) {};</script> -->
+</head>
+
+<body translate="no">
+    <canvas></canvas>
+    <div class="wrapper">
+        <section class="hero">
+            <h1 class="headline">ERROR={CORRUPT.MEMORY.ARRAY}</h1>
+            <p class="subhead">Instr@{0x7F3A_C9B4} requested data from Mem@{0xE4D9_A0FF}.<br>
+                                READ operation returned {QUANTUM_ACCESS_FAULT}.</p>
+        </section>
+    </div>
+
+    <script src="./js/simplex-noise.min.js"></script>
+    <script id="rendered-js" type="module" src="./js/memory-core.js"></script>
+
+    <div class="dg ac" style="display:none;">
+        <div class="dg main a" style="width: 245px;">
+            <div style="width: 6px; margin-left: -3px; height: 81px; cursor: ew-resize; position: absolute;"></div>
+            <ul style="height: auto;">
+                <li class="cr number has-slider">
+                    <div><span class="property-name">Object Speed</span>
+                        <div class="c">
+                            <div><input type="text"></div>
+                            <div class="slider">
+                                <div class="slider-fg" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="folder">
+                    <div class="dg">
+                        <ul class="closed">
+                            <li class="title">Proximity Settings</li>
+                            <li class="cr number has-slider">
+                                <div><span class="property-name">Proximity Range</span>
+                                    <div class="c">
+                                        <div><input type="text"></div>
+                                        <div class="slider">
+                                            <div class="slider-fg" style="width: 50%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cr number has-slider">
+                                <div><span class="property-name">Proximity Strength</span>
+                                    <div class="c">
+                                        <div><input type="text"></div>
+                                        <div class="slider">
+                                            <div class="slider-fg" style="width: 32.7586%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cr number has-slider">
+                                <div><span class="property-name">Proximity Falloff</span>
+                                    <div class="c">
+                                        <div><input type="text"></div>
+                                        <div class="slider">
+                                            <div class="slider-fg" style="width: 25%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="cr boolean">
+                    <div><span class="property-name">Transparent</span>
+                        <div class="c"><input type="checkbox" checked="checked"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="close-button close-bottom" style="width: 245px;">Close Controls</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

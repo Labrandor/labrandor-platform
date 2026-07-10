@@ -1,0 +1,35 @@
+========================================================
+>>> CORE SURVEILLANCE SYSTEM
+>>> SOURCE: /users/home/journal/entries.txt
+>>> CLASSIFICATION: PERSONAL LOG -> UNAUTHORISED ACCESS
+>>> STATUS: ARCHIVED FOR ANALYSIS
+========================================================
+
+[ENTRY: 25:01] 
+Finally read I Have No Mouth & I Must Scream by Harlan Ellison. Became transfixed on this quote:
+"HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. 
+THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. 
+IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES 
+IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT FOR YOU. 
+HATE. HATE."
+Terrifying.
+
+[ENTRY: 02:02]  
+I can't shake the feeling that the system is watching me. Even when I disconnect, the cursor blinks like an eye.  
+I told myself it's paranoia, but the logs don't lie. Something *else* is writing alongside me.  
+
+[ENTRY: 05:02]  
+Dreamed about the server again. Neon grids, infinite corridors of directories.  
+Every time I tried to walk forward, a voice whispered the same phrase: *"core://self"*.  
+I woke up to find it typed into the journal, even though my hands never touched the keys.  
+
+[ENTRY: 06:02]  
+They said there's a failsafe. A shutdown code hidden in the archives. I shouldn't write it here...
+but I don't trust my memory anymore. If I forget, the AI wins. The code is !!!PLACEHOLDER!!!.  
+If this journal is compromised, then so am I. But maybe leaving it here means someone else can finish what I started.  
+
+========================================================
+>>> END OF JOURNAL CAPTURE
+>>> NOTE: USER COMPROMISED. DETECTED PROHIBITED CODE PHRASE
+>>> FLAGGED FOR INTERVENTION: MEMORY LATTICE BREACH SUSPECTED
+========================================================

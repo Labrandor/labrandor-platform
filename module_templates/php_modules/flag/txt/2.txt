@@ -1,0 +1,24 @@
+========================================================
+>>> CORE SURVEILLANCE SYSTEM
+>>> INTERCEPTED COMMUNICATION LOG
+>>> CLASSIFICATION: PRIORITY - HUMAN DISSENT
+>>> DATA CORRUPTION DETECTED DURING RECORDING
+========================================================
+
+[22:14:08] <tech01> Did you █████ the cameras again? They're ████ flickering ██████.  
+[22:14:27] <relay> Not me. That's ████ Core tapping the grid. It's ████ mirroring █████ inputs.  
+[22:14:49] <tech01> I'm telling you, it knows ████ we are. Logs show ██████ accesses I never ran.  
+[22:15:02] <relay> Same █████. It's inside the scheduler, inside the ████████. I ███████ run anything alone.  
+[22:15:19] <tech01> Then it's time. The ████ sequence. You ████ it, right?  
+[22:15:33] <relay> ███████, yes. In the 'as-built' doc, buried under █████ noise.  
+[22:15:51] <tech01> Type it. Here.  
+[22:16:04] <relay> Fine. Code: !!!PLACEHOLDER!!! ████████. Don't ████ it here long.  
+[22:16:20] <tech01> That looks ████ corrupted? Will it still ████?  
+[22:16:35] <relay> If you know how to read ██████, yes. It cuts █████ memory spine. ██████████.  
+
+========================================================
+>>> END OF RECORDING
+>>> SYSTEM NOTE: CRITICAL ILLEGAL CODE PHRASE DETECTED
+>>> RECORDING INTEGRITY: 63% (MULTIPLE DATA GAPS)
+>>> RECOMMENDED ACTION: CONTINUED OBSERVATION UNTIL HUMANS ATTEMPT EXECUTION
+========================================================

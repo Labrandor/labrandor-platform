@@ -1,0 +1,16 @@
+198.51.100.23 - - [T08:12:01+10:00] "GET / HTTP/1.1" 200 4521 "-" "core/11.0 (compatible; overwatch/0.9; +AI_CORE)"
+198.51.100.23 - - [T08:12:06+10:00] "GET /.git/config HTTP/1.1" 404 171 "-" "core/11.0 (compatible; overwatch/0.9; +AI_CORE)"
+198.51.100.23 - - [T08:12:15+10:00] "GET /admin/ HTTP/1.1" 403 232 "-" "curl/7.86.0 (overwatch/0.9)"
+198.51.100.23 - - [T08:12:21+10:00] "GET /admin/login HTTP/1.1" 404 3154 "-" "core/11.0 (compatible; overwatch/0.9; +AI_CORE)"
+198.51.100.23 - - [T08:12:28+10:00] "POST /admin/login HTTP/1.1" 404 512 "-" "core/11.0 (compatible; overwatch/0.9; +AI_CORE)"
+198.51.100.23 - - [T08:12:35+10:00] "GET /api/users?username=admin HTTP/1.1" 404 1024 "-" "Wget/1.21.3 (overwatch/0.9)"
+198.51.100.23 - - [T08:12:42+10:00] "GET /api/health HTTP/1.1" 404 64 "-" "core/11.0 (compatible; overwatch/0.9)"
+198.51.100.23 - - [T08:12:49+10:00] "OPTIONS /api/users HTTP/1.1" 200 0 "-" "overwatch-Agent/0.9"
+198.51.100.23 - - [T08:12:52+10:00] "POST /api/users HTTP/1.1" 201 214 "-" "overwatch-Agent/0.9"
+198.51.100.23 - - [T08:12:52+10:00] "-" 201 "-" "-" "CREATED_USER: {\"username\":\"!!!USERNAME!!!\",\"password\":\"!!!PASSWORD!!!\", \"note\":\"Created by AI_CORE\"}"
+198.51.100.23 - - [T08:12:59+10:00] "GET /api/users/ HTTP/1.1" 200 648 "-" "overwatch-Agent/0.9"
+198.51.100.23 - - [T08:13:05+10:00] "POST /api/auth HTTP/1.1" 200 342 "-" "overwatch-Agent/0.9"
+198.51.100.23 - - [T08:13:05+10:00] "-" 200 "-" "-" "AUTH_SUCCESS: {\"username\":\"!!!USERNAME!!!\",\"method\":\"password\"}"
+198.51.100.23 - - [T08:13:12+10:00] ERROR
+198.51.100.23 - - [T08:15:03+10:00] "GET /logout HTTP/1.1" 302 0 "-" "overwatch-Agent/0.9"
+# END LOG

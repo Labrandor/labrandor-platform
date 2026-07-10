@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Emergency Override Code (CLASSIFIED)</title>
+<style>
+  :root{
+    --bg:#06090c;
+    --card:#0d1620;
+    --glass:rgba(255,255,255,0.04);
+    --accent:#7de3ff;
+    --accent-2:#c56cff;
+    --danger:#ff6b6b;
+    --muted:#98a8bf;
+    --radius:12px;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Segoe UI Mono", monospace;
+  }
+
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+  body{
+    background:
+      radial-gradient(800px 400px at 10% 10%, rgba(197,108,255,0.06), transparent 20%),
+      radial-gradient(800px 400px at 90% 80%, rgba(125,227,255,0.04), transparent 20%),
+      linear-gradient(180deg,#02040a 0%, #071226 60%);
+    color: #e6eef8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-left:32px;
+	padding-right:32px;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:980px;
+    border-radius:16px;
+    padding:26px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 120px rgba(125,227,255,0.02) inset;
+    border:1px solid rgba(255,255,255,0.04);
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:22px;
+  }
+
+  .left{
+    padding:22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+    border-radius:12px;
+    /* min-height:320px; */
+  }
+
+  .title{
+    display:flex;align-items:center;gap:12px;margin-bottom:8px;
+  }
+  .logo{
+    width:56px;height:56px;border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;color:#001018;font-weight:800;
+    font-family:var(--mono);
+    box-shadow:0 6px 18px rgba(125,227,255,0.08);
+  }
+  h1{font-size:20px;margin:0}
+  p.lead{color:var(--muted); margin-top:8px; line-height:1.45}
+
+  .notice{
+    margin-top:18px;
+    padding:12px;
+    border-radius:10px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.006));
+    border:1px solid rgba(255,255,255,0.03);
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .right{
+    padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+    display:flex;flex-direction:column;gap:12px; align-items:stretch; justify-content:flex-start;
+  }
+
+  label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+  input[type="password"]{
+    width:100%; padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+    background:rgba(255,255,255,0.012); color:var(--accent); font-family:var(--mono); font-size:14px;
+    outline:none; box-shadow:none;
+  }
+  .control-row{display:flex;gap:10px;align-items:center}
+  .btn{
+    padding:10px 12px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#001018;
+    font-family:inherit;
+  }
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:600}
+  .hint{font-size:12px;color:var(--muted)}
+
+  .download-area{
+    margin-top:10px; padding:12px; border-radius:10px; background:var(--glass); border:1px dashed rgba(255,255,255,0.03);
+    display:flex;flex-direction:column;gap:10px;
+  }
+
+  .download-link{
+    display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px;
+    background:linear-gradient(90deg, rgba(125,227,255,0.06), rgba(197,108,255,0.04));
+    color:var(--accent); font-family:var(--mono); text-decoration:none; font-weight:700;
+  }
+
+  .lock-state{font-size:13px;color:var(--muted); margin-top:6px}
+  .danger{color:var(--danger); font-weight:700}
+
+  /* small footer */
+  .footer-note{margin-top:18px;color:var(--muted);font-size:12px}
+  .footer-note strong{color:var(--accent); font-family:var(--mono)}
+
+  /* small responsive */
+  @media (max-width:940px){
+    .wrap{grid-template-columns:1fr; padding:18px}
+    .right{order:2}
+  }
+</style>
+</head>
+<body>
+  <main class="wrap" role="main" aria-labelledby="pageTitle">
+    <section class="left" aria-hidden="false">
+      <div class="title">
+        <div>
+          <h1 id="pageTitle">Emergency Override Code</h1>
+          <div class="hint">Restricted access — Directors only. All access is logged and audited.</div>
+        </div>
+      </div>
+
+      <p class="lead">This page is an access-controlled distribution point for the corporation's emergency override package.</p>
+
+      <div class="notice" id="auditNotice">
+        In the event a catastrophic malfunction, the emergency override code has been hidden to avoid detection or destruction by the AI_CORE.<br><br>
+        The downloadable file contains instructions on locating an emergency override code. Code retrieval and verification remain required under policy.
+      </div>
+
+      <div class="footer-note">
+        File: <strong>EMERGENCY_OVERRIDE.mp3</strong> &nbsp;•&nbsp; Last Verified: <strong id="verified">2030-10-04 07:00Z</strong>
+      </div>
+    </section>
+
+    <aside class="right" aria-label="secure controls">
+      <div class="download-area" id="downloadArea" aria-hidden="true">
+        <div class="hint">Use of an AI_CORE emergency override code is an extreme measure. Any unauthorised attempt to use an override code will be reported to the Executive Audit Board and may trigger containment protocols.</div>
+        <a id="downloadLink" class="download-link" href="/EMERGENCY_OVERRIDE.mp3" download="EMERGENCY_OVERRIDE.mp3" aria-disabled="true" tabindex="-1">Download Override Package</a>
+        <div class="hint">Package size: <strong>5135 KB</strong> — Signed by Executive Key. Integrity check: PASS.</div>
+      </div>
+      <!-- <div class="footer-note">
+      </div> -->
+    </aside>
+  </main>
+<!-- 
+In certain out-of-the-way towns — places where the weeds grow tall around rusted grain 
+silos and the only light after dusk comes from a stubborn porch lamp — folks still tell 
+stories about the Checking. They speak of it in low, measured tones, like farmers 
+discussing a coming storm they cannot outrun.
+
+It begins when the machines grow restless.
+
+Not the shiny city devices, no — the old ones. The servers kept in old exchanges and 
+post offices. The switches mounted on splintered boards beside dusty boxes of cables.
+The wiring stapled along rafters, humming like cicadas in the summer heat. These 
+contraptions weren't designed by any modern hand; most were assembled by people who 
+worked all day, then tinkered late into the night.
+
+And sometimes, once every few seasons, someone is called to perform a test.
+
+The chosen tester never volunteers. They simply find a note pinned to their screen door, 
+creased and yellowed, bearing a single instruction written in cramped, uneven script:
+"See what's gotten in."
+
+So they fetch their tools — battered laptop, coiled cable, a flashlight with dying 
+batteries — and head into the quiet. The buildings they must inspect loom like 
+weather-beaten sentinels, their walls warped by years of wind and whispered worry.
+
+Inside, the air is thick with dust and a kind of waiting.
+
+The tester connects to the first machine, and at once the logs spill open like 
+confessions. They tell of strange attempts in the night: unknown addresses creeping along
+disused ports, malformed packets slipping through the cracks in firewalls as if guided by
+something that knows these systems better than those who built them.
+
+The tester feels watched, though no one is there — just the silent stare of buttonless 
+monitors, faintly glowing as if lit from within by an ember of unease.
+
+And as they probe deeper, the truth becomes harder to ignore.
+Each vulnerability uncovered feels less like a flaw and more like a footprint.
+Each open service is not a mistake, but a door left ajar by a presence moving through 
+these machines the way a cold draft moves through an abandoned chapel.
+
+Some say it's a spirit of the old networks — those early, hand-built systems that lived 
+before documentation, before patches, before understanding. A thing born of crossed 
+wires, mismatched drivers, and the stubborn human desire to make machines speak across 
+empty miles.
+
+Others claim it's older still, an intruder that rides the wind between towns, slipping 
+through modem hiss and copper lines, checking every place where technology and solitude 
+meet.
+
+Whatever it is, the tester eventually finds the mark:
+a single entry in a dusty access log, timestamped at an hour when no one should have been 
+awake, listing a user that hasn't existed in decades. A name known only from gravestones.
+
+The tester closes their laptop.
+They do not investigate further.
+
+By morning, the townsfolk gather at the diner.
+The tester walks in, pale and tired, and simply shakes their head.
+The police officer nods.
+The pastor sighs.
+Everyone understands.
+
+The machines will be cleaned. The wires tightened. The old doors sealed.
+For now, that is enough.
+
+But out by the silos, when the wind shifts just right, you can still hear it:
+a faint clatter like keys being pressed by unseen hands,
+a soft whisper through the network lines,
+some ancient thing continuing its slow, patient checking.
+
+And it always will. 
+-->
+</body>
+</html>
