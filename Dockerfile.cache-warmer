@@ -1,0 +1,16 @@
+# syntax=docker/dockerfile:1.6
+ARG ALPINE_TAG=3.19
+FROM alpine:${ALPINE_TAG} AS warmer
+
+ARG ALPINE_BRANCH=v3.19
+ARG CACHE_ID=apk-cache-alpine319-amd64
+ARG PACKAGES="apache2 php82 php82-apache2 php82-session php82-mysqli php82-pdo_mysql"
+
+RUN --mount=type=cache,id=${CACHE_ID},sharing=locked,target=/var/cache/apk \
+    set -eux; \
+    printf '%s\n' \
+      "https://dl-cdn.alpinelinux.org/alpine/${ALPINE_BRANCH}/main" \
+      "https://dl-cdn.alpinelinux.org/alpine/${ALPINE_BRANCH}/community" \
+      > /etc/apk/repositories; \
+    apk add --update --cache-dir /var/cache/apk ${PACKAGES}; \
+    true

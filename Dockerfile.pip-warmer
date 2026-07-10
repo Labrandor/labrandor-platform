@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:1.6
+ARG ALPINE_TAG=3.19
+FROM alpine:${ALPINE_TAG}
+
+ARG ALPINE_BRANCH=v3.19
+ARG CACHE_ID=apk-cache-alpine319
+ARG PIP_CACHE_ID=pip-cache-alpine319
+ARG PIP_PKGS="fastapi uvicorn[standard] jinja2"
+
+RUN --mount=type=cache,id=${CACHE_ID},sharing=locked,target=/var/cache/apk \
+    printf '%s\n' \
+      "https://dl-cdn.alpinelinux.org/alpine/${ALPINE_BRANCH}/main" \
+      "https://dl-cdn.alpinelinux.org/alpine/${ALPINE_BRANCH}/community" \
+      > /etc/apk/repositories \
+ && apk add --cache-dir /var/cache/apk python3 py3-pip
+
+# Warm pip wheels into a persistent BuildKit cache (no need to keep the image)
+# ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+# RUN --mount=type=cache,id=${PIP_CACHE_ID},target=/root/.cache/pip \
+#     python3 -m pip install -U pip \
+#  && python3 -m pip download --dest /root/.cache/pip/wheels ${PIP_PKGS}
