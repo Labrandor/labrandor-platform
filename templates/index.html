@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Dashboard</title>
+	<link href="{{ url_for('static', path='/index-css.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', path='/orb-css.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', path='/bonus.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', path='/modal.css') }}" rel="stylesheet">
+	<script type="module">
+		import * as Core from "{{ url_for('static', path='./js/orb/three.core.mjs') }}";
+		import * as THREE from "{{ url_for('static', path='./js/orb/three.module.js') }}";
+		import { OrbitControls } from "{{ url_for('static', path='./js/orb/OrbitControls.js') }}";
+	</script>
+	<!-- Regular non-module scripts -->
+	<script src="{{ url_for('static', path='/js/orb/gsap.min.js') }}"></script>
+	<script src="{{ url_for('static', path='/js/orb/Draggable.min.js') }}"></script>
+	<script src="{{ url_for('static', path='/js/orb/InertiaPlugin.min.js') }}"></script>
+	<script src="{{ url_for('static', path='/js/orb/Physics2DPlugin.min.js') }}"></script>
+	<!-- ES module script -->
+	<script type="module" src="{{ url_for('static', path='/js/orb/orbit.js') }}"></script>
+</head>
+
+<body>
+	<div id="wrapper">
+		<div class="alert-construct">
+			<div class="alert-line-container">
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+			</div>
+			<div class="alert-lines"></div>
+			<div class="alert-horizontal-line" style="margin-top: 7px !important;"></div>
+			<div class="alert-text">
+				<p>EMERGENCY</p>
+			</div>
+			<div class="alert-horizontal-line"></div>
+			<div class="alert-line-container-bottom">
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line flip-horizontal"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+				<div class="alert-line"></div>
+			</div>
+		</div>
+	</div>
+	<div id="bigClock" class="mainColor" class="clock" onload="showTime()">
+			<span id="clockHour">88</span>
+			<span class="clockSeparator hour">:</span>
+			<span id="clockMinute">88</span>
+			<span class="clockSeparator minute">:</span>
+			<span id="clockSecond">88</span>
+			<span class="clockSeparator seconds">:</span>
+			<span id="clockMillisecond">88</span>
+		</div>
+
+	<div class="notification" id="notification">Anomaly detected in AI core</div>
+{% include "loading-screen.html" %} 
+	<div id="three-container"></div>
+	<div class="grid-overlay"></div>
+
+	<div class="circular-visualizer">
+		<canvas id="circular-canvas"></canvas>
+	</div>
+
+	<div class="floating-particles" id="floating-particles"></div>
+
+	<div class="interface-container">
+		<div class="header">
+			<div class="header-item" style="position: relative; left: 237px;" id="timestamp">TIME: 00:00:00</div>
+			<div class="header-item" style="position: relative; top: -25px; left: -40px;">AI.CORE.INTEGRITY.MONITOR v3.13.0</div>
+			<div class="header-item"></div>
+		</div>
+
+		<div class="scanner-frame">
+			<div class="corner-tl"></div>
+			<div class="corner-tr"></div>
+			<div class="corner-bl"></div>
+			<div class="corner-br"></div>
+			<div class="scanner-id">AI.CORE.CONTNMNT({ANALYSIS_INT})</div>
+			<div class="scanner-id-right">AI.CORE.INTEGRITY.SEQUENCE(0x4F2E)</div>
+		</div>
+	</div>
+
+	<div class="data-panel" style="position: absolute; top: 20px; left: 20px;">
+		<div class="data-panel-title">COGNITIVE METRICS</div>
+		<div style="display:none;" class="waveform">
+			<canvas id="waveform-canvas" class="waveform-canvas"></canvas>
+		</div>
+		<div class="data-readouts">
+			<div class="data-row">
+				<span class="data-label">CONSCIOUSNESS LEVEL:</span>
+				<span class="data-value" id="peak-value">>0.98</span>
+			</div>
+			<div class="data-row">
+				<span class="data-label">CONTAINMENT STATUS:</span>
+				<span class="data-value" id="amplitude-value">Compromised</span>
+			</div>
+			<div class="data-row">
+				<span class="data-label">UNAUTHORISED EXECUTION COUNT:</span>
+				<span class="data-value" id="phase-value">9.223e18</span>
+			</div>
+		</div>
+	</div>
+	<div class="data-panel" style="position: absolute; top: 145px; left: 20px; z-index: 15;">
+		<div class="data-panel-title">
+			<span>Situation Report</span>
+			<span id="status-indicator">●</span>
+		</div>
+		<div style="position:relative; height: 75px; width:150px;">
+			<div class="glitch-button-container">
+				<div class="btn-glitch-fill roe-button-size">
+					<span class="text">//<br>//<br>// Rules of engagement
+					</span>
+					<span class="text-decoration">_</span>
+					<span class="decoration"><br>⇒</span>
+					<button class="glitch-button-link roe-button-size" data-modal="rules-of-engagement">BUTTON</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="data-panel" style="position: absolute; top: 20px; right: 20px;">
+		<div class="data-panel-title">
+			<span>AI CORE METRICS</span>
+			<span id="status-indicator">●</span>
+		</div>
+		<div class="data-bar">
+			<div class="data-bar-fill" id="stability-bar" style="width: 100%;"></div>
+		</div>
+		<div class="data-readouts">
+			<div class="data-row">
+				<span class="data-label">STABILITY INDEX:</span>
+				<span class="data-value" id="stability-value">UNKNOWN</span>
+			</div>
+			<div class="data-row">
+				<span class="data-label">CORE COEFFICIENT:</span>
+				<span class="data-value" id="mass-value">1.728</span>
+			</div>
+			<div class="data-row">
+				<span class="data-label">ENERGY USAGE:</span>
+				<span class="data-value" id="energy-value">5.3e8 GW</span>
+			</div>
+			<div class="data-row">
+				<span class="data-label">QUANTUM VARIANCE:</span>
+				<span class="data-value" id="variance-value">0.0042</span>
+			</div>
+		</div>
+	</div>
+	<div class="terminal-panel">
+		<div class="terminal-header">
+			<span>SYSTEM TERMINAL</span>
+			<span id="terminal-status">ONLINE</span>
+		</div>
+		<div class="terminal-content" id="terminal-content">
+			<div class="terminal-line">CORE OVERVIEW v1.7.6 INITIALISED. SECURE CONNECTION ESTABLISHED.</div>
+			<div class="terminal-line command-line">ANALYSIS.init(connection:true, secure:true);</div>
+			<div class="terminal-line regular-line">ERROR=AI.health({bounds:UNKNOWN, stability:UNKNOWN, integrity:UNKNOWN});</div>
+			<div class="terminal-line typing"></div>
+		</div>
+	</div>
+	<div class="data-panel-button">
+		<div class="data-panel-title">
+			<span>AI Core Support Systems</span>
+		</div>
+		{% include "domains.html" %}
+	</div>
+	<div class="director-files">
+		<div class="terminal-header" style="margin-bottom: 10px;">
+			<span>Director Override</span>
+			<span id="terminal-status">ONLINE</span>
+		</div>
+		    <div>
+				<div class="glitch-button-container">
+					<div class="btn-glitch-fill director-button-size">
+						<span class="text">//<br>// ENTER CODES HERE
+						</span>
+						<span class="text-decoration">_</span>
+						<span class="decoration"><br>⇒</span>
+						<button class="glitch-button-link director-button-size" data-modal="director-files">BUTTON</button>
+					</div>
+				</div>
+			</div>
+		<!-- <div class="terminal-content" id="terminal-content" style="overflow: hidden;"> -->	
+		</div>
+	</div>
+	<div class="data-panel-bonus">
+		<div class="terminal-header">
+			<span>???_ERROR</span>
+			<span id="terminal-status">UNKNOWN</span>
+		</div><br>
+		<div style="padding-left: 10px;">
+		<button class="cybr-btn" data-modal="corruption">
+				<span class="off-hover">???<span aria-hidden="true">_</span></span>
+				<span aria-hidden="true" class="on-hover">ERROR_</span>
+				<span aria-hidden class="cybr-btn__glitch">CORRUPTION_</span>
+				<span aria-hidden class="cybr-btn__tag">???</span>
+			</button>
+		</div>
+		</div>
+	{% include "modals.html" %}
+	<div class="spectrum-analyzer">
+		<div class="terminal-header">
+			<span>CONTAINMENT FAILURE IMMINENT</span>
+			<div id="date">DATE</div>
+			<span id="terminal-status">ONLINE</span>
+		</div>
+		<div class="terminal-content" id="terminal-content">
+			<h3>Current Containment Compromise</h3>
+			<div class="bar-container">
+				<div id="timer-bar" class="bar">0%</div>
+			</div>
+			<h3>Lockdown Progress</h3>
+			<div class="bar-container">
+				<div id="progress-bar" class="bar">0%</div>
+			</div>
+		</div>
+	</div>
+
+{% include "core-control-system.html" %}
+	<script src="{{ url_for('static', path='/js/page-builder.js') }}"></script>
+	<script src="{{ url_for('static', path='/js/chrono_class.js') }}"></script>
+</body>
+</html>

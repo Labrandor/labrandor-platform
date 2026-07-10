@@ -1,0 +1,739 @@
+<html lang="en">
+<head>
+     <title>Win</title>
+    <link href="{{ url_for('static', path='/win.css') }}" rel="stylesheet">
+    <script>
+        window.console = window.console || function (t) { };
+    </script>
+</head>
+
+<body translate="no">
+    <div class="canvas-positioning">
+        <canvas width="1034" height="810" style="touch-action: none; width: 1034px; height: 810px;"></canvas>
+    </div>
+    <div class="grid-overlay"></div>
+    <div class="secure-alert-text">SYSTEM SECURE</div>
+    <div class="alert-wrapper">
+        <div class="alert-construct">
+            <div class="alert-line-container">
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+            </div>
+            <div class="alert-lines"></div>
+            <div class="alert-horizontal-line" style="margin-top: 7px !important;"></div>
+            <div class="alert-text">AI CORE SECURE</div>
+            <div class="alert-horizontal-line"></div>
+            <div class="alert-line-container-bottom">
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line flip-horizontal"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+                <div class="alert-line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="interface-container">
+		<div class="header">
+			<div class="header-item"></div>
+			<div class="header-item">AI.CORE.INTEGRITY.MONITOR<br> v3.13.0</div>
+			<div class="header-item"></div>
+		</div>
+
+		<div class="scanner-frame">
+			<div class="corner-tl"></div>
+			<div class="corner-tr"></div>
+			<div class="corner-bl"></div>
+			<div class="corner-br"></div>
+			<div class="scanner-id">AI.CORE.CONTNMNT({ANALYSIS_INT})</div>
+			<div class="scanner-id-right">AI.CORE.INTEGRITY.SEQUENCE(0x4F2E)</div>
+		</div>
+	</div>
+    <div class="central-grid">
+    <div class="terminal-wrap">
+     <div class="terminal" aria-label="CRT terminal window">
+      <div class="term-title">
+        <div class="led on" aria-hidden="true"></div>
+        <span>AI SAFETY SUITE v4.7 — SECURE CONSOLE</span>
+      </div>
+      <div class="screen" id="screen" tabindex="0">
+        <pre id="output" class="terminal-text" aria-live="polite"></pre>
+      </div>
+    </div>
+  </div>
+  <div class="grid-gap"></div>
+  <div class="hex-wrapper">
+    <div class="hex-terminal" id="aiFeed">
+        <div class="term-title">AI_CORE :: MEMORY STREAM</div>
+        <div class="screen">
+            <pre id="aiOutput" class="hex-feed"></pre>
+        </div>
+    </div>
+</div>
+</div>
+<div class="bottom-alert-wrapper">
+    <div class="alert-construct">
+        <div class="alert-line-container">
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+        </div>
+        <div class="alert-lines"></div>
+        <div class="alert-horizontal-line" style="margin-top: 7px !important;"></div>
+        <div class="alert-text">SYSTEM NOMINAL</div>
+        <div class="alert-horizontal-line"></div>
+        <div class="alert-line-container-bottom">
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line flip-horizontal"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+            <div class="alert-line"></div>
+        </div>
+    </div>
+</div>
+
+<script id="vertexShader" type="x-shader/x-vertex">
+  //
+  // GLSL textureless classic 3D noise "cnoise",
+  // with an RSL-style periodic variant "pnoise".
+  // Author:  Stefan Gustavson (stefan.gustavson@liu.se)
+  // Version: 2011-10-11
+  //
+  // Many thanks to Ian McEwan of Ashima Arts for the
+  // ideas for permutation and gradient selection.
+  //
+  // Copyright (c) 2011 Stefan Gustavson. All rights reserved.
+  // Distributed under the MIT license. See LICENSE file.
+  // https://github.com/ashima/webgl-noise
+  //
+  
+  vec3 mod289(vec3 x)
+  {
+  	return x - floor(x * (1.0 / 289.0)) * 289.0;
+  }
+  
+  vec4 mod289(vec4 x)
+  {
+  	return x - floor(x * (1.0 / 289.0)) * 289.0;
+  }
+  
+  vec4 permute(vec4 x)
+  {
+  	return mod289(((x*34.0)+1.0)*x);
+  }
+  
+  vec4 taylorInvSqrt(vec4 r)
+  {
+  	return 1.79284291400159 - 0.85373472095314 * r;
+  }
+  
+  vec3 fade(vec3 t) {
+  	return t*t*t*(t*(t*6.0-15.0)+10.0);
+  }
+  
+  // Classic Perlin noise
+  float cnoise(vec3 P)
+  {
+  	vec3 Pi0 = floor(P); // Integer part for indexing
+  	vec3 Pi1 = Pi0 + vec3(1.0); // Integer part + 1
+  	Pi0 = mod289(Pi0);
+  	Pi1 = mod289(Pi1);
+  	vec3 Pf0 = fract(P); // Fractional part for interpolation
+  	vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+  	vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+  	vec4 iy = vec4(Pi0.yy, Pi1.yy);
+  	vec4 iz0 = Pi0.zzzz;
+  	vec4 iz1 = Pi1.zzzz;
+  
+  	vec4 ixy = permute(permute(ix) + iy);
+  	vec4 ixy0 = permute(ixy + iz0);
+  	vec4 ixy1 = permute(ixy + iz1);
+  
+  	vec4 gx0 = ixy0 * (1.0 / 7.0);
+  	vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+  	gx0 = fract(gx0);
+  	vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+  	vec4 sz0 = step(gz0, vec4(0.0));
+  	gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+  	gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+  
+  	vec4 gx1 = ixy1 * (1.0 / 7.0);
+  	vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+  	gx1 = fract(gx1);
+  	vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+  	vec4 sz1 = step(gz1, vec4(0.0));
+  	gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+  	gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+  
+  	vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+  	vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+  	vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+  	vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+  	vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+  	vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+  	vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+  	vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+  
+  	vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+  	g000 *= norm0.x;
+  	g010 *= norm0.y;
+  	g100 *= norm0.z;
+  	g110 *= norm0.w;
+  	vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+  	g001 *= norm1.x;
+  	g011 *= norm1.y;
+  	g101 *= norm1.z;
+  	g111 *= norm1.w;
+  
+  	float n000 = dot(g000, Pf0);
+  	float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+  	float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+  	float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+  	float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+  	float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+  	float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+  	float n111 = dot(g111, Pf1);
+  
+  	vec3 fade_xyz = fade(Pf0);
+  	vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+  	vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+  	float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+  	return 2.2 * n_xyz;
+  }
+  
+  // Classic Perlin noise, periodic variant
+  float pnoise(vec3 P, vec3 rep)
+  {
+  	vec3 Pi0 = mod(floor(P), rep); // Integer part, modulo period
+  	vec3 Pi1 = mod(Pi0 + vec3(1.0), rep); // Integer part + 1, mod period
+  	Pi0 = mod289(Pi0);
+  	Pi1 = mod289(Pi1);
+  	vec3 Pf0 = fract(P); // Fractional part for interpolation
+  	vec3 Pf1 = Pf0 - vec3(1.0); // Fractional part - 1.0
+  	vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
+  	vec4 iy = vec4(Pi0.yy, Pi1.yy);
+  	vec4 iz0 = Pi0.zzzz;
+  	vec4 iz1 = Pi1.zzzz;
+  
+  	vec4 ixy = permute(permute(ix) + iy);
+  	vec4 ixy0 = permute(ixy + iz0);
+  	vec4 ixy1 = permute(ixy + iz1);
+  
+  	vec4 gx0 = ixy0 * (1.0 / 7.0);
+  	vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
+  	gx0 = fract(gx0);
+  	vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
+  	vec4 sz0 = step(gz0, vec4(0.0));
+  	gx0 -= sz0 * (step(0.0, gx0) - 0.5);
+  	gy0 -= sz0 * (step(0.0, gy0) - 0.5);
+  
+  	vec4 gx1 = ixy1 * (1.0 / 7.0);
+  	vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
+  	gx1 = fract(gx1);
+  	vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
+  	vec4 sz1 = step(gz1, vec4(0.0));
+  	gx1 -= sz1 * (step(0.0, gx1) - 0.5);
+  	gy1 -= sz1 * (step(0.0, gy1) - 0.5);
+  
+  	vec3 g000 = vec3(gx0.x,gy0.x,gz0.x);
+  	vec3 g100 = vec3(gx0.y,gy0.y,gz0.y);
+  	vec3 g010 = vec3(gx0.z,gy0.z,gz0.z);
+  	vec3 g110 = vec3(gx0.w,gy0.w,gz0.w);
+  	vec3 g001 = vec3(gx1.x,gy1.x,gz1.x);
+  	vec3 g101 = vec3(gx1.y,gy1.y,gz1.y);
+  	vec3 g011 = vec3(gx1.z,gy1.z,gz1.z);
+  	vec3 g111 = vec3(gx1.w,gy1.w,gz1.w);
+  
+  	vec4 norm0 = taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
+  	g000 *= norm0.x;
+  	g010 *= norm0.y;
+  	g100 *= norm0.z;
+  	g110 *= norm0.w;
+  	vec4 norm1 = taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
+  	g001 *= norm1.x;
+  	g011 *= norm1.y;
+  	g101 *= norm1.z;
+  	g111 *= norm1.w;
+  
+  	float n000 = dot(g000, Pf0);
+  	float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
+  	float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
+  	float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
+  	float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
+  	float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
+  	float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
+  	float n111 = dot(g111, Pf1);
+  
+  	vec3 fade_xyz = fade(Pf0);
+  	vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
+  	vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
+  	float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
+  	return 1.5 * n_xyz;
+  }
+  
+  // Turbulence By Jaume Sanchez => https://codepen.io/spite/
+  // Distributed under the MIT license.
+  
+  varying vec2 vUv;
+  varying float noise;
+  varying float qnoise;
+  varying float displacement;
+  
+  uniform float time;
+  uniform float turb;
+  uniform float u_noise;
+  uniform float pointscale;
+  uniform float decay;
+  uniform float complex;
+  uniform float displ;
+  uniform float waves;
+  uniform float eqcolor;
+  uniform float scale;
+  uniform bool fragment;
+  
+  float turbulence( vec3 p) {
+  	float t = - turb;
+  	for (float f = 1.0 ; f <= 3.0 ; f++ ){
+  		float power = pow( 2.0, f );
+  			t += abs( pnoise( vec3( power * p ), vec3( 10.0, 10.0, 10.0 ) ) / power );
+  		}
+  	return t;
+  }
+  
+  void main() {
+  
+  	vUv = uv;
+  
+  	noise = (u_noise *  - waves) * turbulence( decay * degrees(normal + time));
+  	qnoise = (complex *  - eqcolor) * turbulence( decay * sign(normal + time));
+  	float b = pnoise( 0.5 * sign(position) + vec3( 1.0 * time ), vec3( 1.0 ) );
+  
+  	if (fragment == true) {
+  		displacement = (noise) * (scale);
+  	} else {
+  		displacement = log2(sin(noise) + tan(b * displ) * 0.2) - scale;
+  	}	
+  	vec3 newPosition = (position) + sin(normal * displacement);
+  	gl_Position = (projectionMatrix * modelViewMatrix) * vec4( newPosition, 1.0 );
+  	gl_PointSize = (pointscale);
+  	//gl_ClipDistance[0];
+  
+  }
+  
+</script>
+<script id="fragmentShader" type="x-shader/x-vertex">
+  varying float qnoise;
+  varying float noise;
+  
+  uniform float time;
+  uniform float eqcolor;
+  uniform bool redhell;
+  
+  void main() {
+  	float r, g, b;
+    
+  	if (!redhell == true) {
+  		r = (noise - 0.5);
+  		g = (noise - 0.5);
+  		b = (noise * 1.5);;
+  	} else {
+  		r = ((noise) * 5.0);
+  		g = ((noise) * 3.0);
+  		b = ((noise) * 4.0);
+  	}
+  	
+  	r *= noise * 10.0 * eqcolor;
+  	b /= noise * 5.0 * eqcolor;
+  	b *= noise * 10.0 * eqcolor;
+  	
+  	gl_FragColor = vec4(r, g, b, 1.0);
+  }
+</script>
+<script id="rendered-js" type="module">
+    import * as THREE from "{{ url_for('static', path='./js/endgame/three.module.js') }}";
+    import { OrbitControls } from "{{ url_for('static', path='./js/endgame/OrbitControls.js') }}";
+
+    const config = {
+        scene: {
+            speed: 0.24,
+            position: 3
+        },
+
+        object: {
+            speed: 0.25
+        },
+
+        shader: {
+            time: 0.22,
+            u_noise: 0.14,
+            decay: 0.86,
+            turb: 1.0,
+            scale: 0.65,
+            waves: 9.0,
+            size: 0.1,
+            displ: 0.0,
+            broken: true,
+            invert: false,
+            color: 5.0,
+            complex: 0.1
+        }
+
+        // shader: {
+        //     time: 0.42,
+        //     u_noise: 0.14,
+        //     decay: 0.86,
+        //     turb: 4.0,
+        //     scale: 0.65,
+        //     waves: 5.0,
+        //     size: 2,
+        //     displ: 0.0,
+        //     broken: true,
+        //     invert: false,
+        //     color: 5.0,
+        //     complex: 0.1
+        // }
+    };
+
+    const uniforms = {
+        turb: {
+            type: "f",
+            value: 0.0
+        },
+
+        time: {
+            type: "f",
+            value: 0.0
+        },
+
+        u_noise: {
+            type: "f",
+            value: 0.0
+        },
+
+        decay: {
+            type: "f",
+            value: 0.0
+        },
+
+        complex: {
+            type: "f",
+            value: 0.0
+        },
+
+        waves: {
+            type: "f",
+            value: 0.0
+        },
+
+        eqcolor: {
+            type: "f",
+            value: 0.0
+        },
+
+        pointscale: {
+            type: "f",
+            value: 0.0
+        },
+
+        scale: {
+            type: "f",
+            value: 0.0
+        },
+
+        displ: {
+            type: "f",
+            value: 0.0
+        },
+
+        fragment: {
+            type: "i",
+            value: true
+        },
+
+        redhell: {
+            type: "i",
+            value: true
+        }
+    };
+
+    class Panel {
+        constructor() {
+            this.init();
+        }
+        init() {
+            function generatePane() {
+                const pn = new Tweakpane.Pane({ title: "Panel" });
+                const sn = pn.addFolder({ title: "Scene", expanded: false });
+                sn.addInput(config.scene, "speed", { min: 0, max: 1, label: "Speed" });
+                //--
+                const sd = pn.addFolder({ title: "Shader" });
+                sd.addInput(config.shader, "time", { min: 0.01, max: 1.0 });
+                sd.addInput(config.shader, "u_noise", { min: -1.0, max: 1.0 });
+                sd.addInput(config.shader, "decay", { min: 0.01, max: 1.0 });
+                sd.addInput(config.shader, "turb", { min: 0.01, max: 1.0 });
+                sd.addInput(config.shader, "scale", { min: 0.1, max: 5.0 });
+                sd.addSeparator();
+                sd.addInput(config.shader, "broken");
+                sd.addInput(config.shader, "waves", { min: 0.01, max: 10.0 });
+                sd.addInput(config.shader, "size", { min: 0.1, max: 5.0, step: 0.5 });
+                //sd.addInput(config.shader, "displ", { min: 0.1, max: 10.0 });
+                sd.addSeparator();
+                sd.addInput(config.shader, "invert");
+                sd.addInput(config.shader, "color", { min: 0.1, max: 5.0 });
+                //sd.addInput(config.shader, "complex", { min: 0.01, max: 2.0 });
+                //--
+                const bt = pn.addFolder({ title: "Preset", expanded: false });
+                sd.addButton({ title: "Reset", label: "Config" }).on("click", () => {
+                    config.shader.time = 0.31;
+                    config.shader.u_noise = 0.37;
+                    config.shader.decay = 0.33;
+                    config.shader.turb = 0.23;
+                    config.shader.scale = 5.0;
+                    config.shader.waves = 5.66;
+                    //config.shader.size = 1.0;
+                    config.shader.displ = 0.0;
+                    config.shader.broken = true;
+                    config.shader.invert = true;
+                    config.shader.color = 5.0;
+                    config.shader.complex = 0.1;
+                    pn.refresh();
+                });
+                bt.addSeparator();
+                bt.addButton({ title: "Liquid", label: "Preset 1" }).on("click", () => {
+                    config.shader.time = 0.24;
+                    config.shader.u_noise = 0.22;
+                    config.shader.decay = 0.52;
+                    config.shader.turb = 0.31;
+                    config.shader.scale = 1.01;
+                    config.shader.waves = 10.0;
+                    //config.shader.size = 1.0;
+                    config.shader.displ = 0.0;
+                    config.shader.broken = true;
+                    config.shader.invert = true;
+                    config.shader.color = 0.10;
+                    config.shader.complex = 2.0;
+                    pn.refresh();
+                });
+                bt.addButton({ title: "Lava", label: "Preset 2" }).on("click", () => {
+                    config.shader.time = 0.43;
+                    config.shader.u_noise = 1.0;
+                    config.shader.decay = 1.0;
+                    config.shader.turb = 0.24;
+                    config.shader.scale = 0.21;
+                    config.shader.waves = 8.0;
+                    //config.shader.size = 1.0;
+                    config.shader.displ = 0.0;
+                    config.shader.broken = true;
+                    config.shader.invert = false;
+                    config.shader.color = 5.0;
+                    config.shader.complex = 2.0;
+                    pn.refresh();
+                });
+                bt.addButton({ title: "Box 1", label: "Preset 3" }).on("click", () => {
+                    config.shader.time = 0.46;
+                    config.shader.u_noise = 0.44;
+                    config.shader.decay = 1.48;
+                    config.shader.turb = 0.65;
+                    config.shader.scale = 1.33;
+                    config.shader.waves = 10.0;
+                    //config.shader.size = 1.0;
+                    config.shader.displ = 5.0;
+                    config.shader.broken = false;
+                    config.shader.invert = false;
+                    config.shader.color = 0.23;
+                    config.shader.complex = 0.2;
+                    pn.refresh();
+                });
+                bt.addButton({ title: "Box 2", label: "Preset 4" }).on("click", () => {
+                    config.shader.time = 0.01;
+                    config.shader.u_noise = 0.37;
+                    config.shader.decay = 1.0;
+                    config.shader.turb = 0.32;
+                    config.shader.scale = 0.0;
+                    config.shader.waves = 10.0;
+                    //config.shader.size = 1.0;
+                    config.shader.displ = 0.0;
+                    config.shader.broken = false;
+                    config.shader.invert = true;
+                    config.shader.color = 3.0;
+                    config.shader.complex = 0.1;
+                    pn.refresh();
+                });
+                bt.addSeparator();
+                bt.addButton({ title: "Random", label: "Change" }).on("click", () => {
+                    config.shader.time = Math.random() * 1.0;
+                    config.shader.u_noise = -Math.random() * 1.0 + Math.random() * 1.0;
+                    config.shader.turb = Math.random() * 1.0;
+                    config.shader.decay = Math.random() * 1.0;
+                    //config.shader.waves = Math.random() * 10.0;
+                    //config.shader.size = 1.0;
+                    config.shader.scale = Math.random() * 1.0;
+                    config.shader.displ = 0;
+                    config.shader.color = Math.random() * 2.0;
+                    config.shader.complex = Math.random() * 2.0;
+                    //config.shader.broken = false;
+                    //config.shader.invert = true;
+                    pn.refresh();
+                });
+            }
+            // generatePane();
+        }
+    }
+
+    class Control {
+        constructor(props) {
+            this.controls = new OrbitControls(props.camera, props.canvas);
+            this.init();
+        }
+        init() {
+            this.controls.target.set(0, 0, 0);
+            this.controls.rotateSpeed = 0.5;
+            this.controls.enableZoom = false;
+            this.controls.enableDamping = true;
+            this.controls.dampingFactor = 0.01;
+            this.update();
+        }
+        update() {
+            this.controls.update();
+        }
+    }
+
+    class Particles {
+        constructor(props) {
+            this.scene = props.scene ? props.scene : null;
+            this.clock = new THREE.Clock();
+            this.init();
+        }
+        init() {
+            this.p_grp = new THREE.Object3D();
+            this.p_mat = new THREE.ShaderMaterial({
+                uniforms: uniforms,
+                vertexShader: document.getElementById("vertexShader").textContent,
+                fragmentShader: document.getElementById("fragmentShader").textContent
+            });
+            // this.p_geo = new THREE.IcosahedronBufferGeometry(0.2, 20);
+            this.p_geo = new THREE.IcosahedronBufferGeometry(0.5, 80);
+            this.p_mes = new THREE.Points(this.p_geo, this.p_mat);
+            this.scene.add(this.p_mes);
+        }
+        render() {
+            this.p_mat.uniforms["time"].value =
+                this.clock.getElapsedTime() * config.shader.time;
+            this.p_mat.uniforms["turb"].value = config.shader.turb;
+            this.p_mat.uniforms["u_noise"].value = config.shader.u_noise * 0.1;
+            this.p_mat.uniforms["decay"].value = config.shader.decay * 0.01;
+            this.p_mat.uniforms["complex"].value = config.shader.complex;
+            this.p_mat.uniforms["waves"].value = config.shader.waves * 3;
+            this.p_mat.uniforms["pointscale"].value = config.shader.size;
+            this.p_mat.uniforms["eqcolor"].value = config.shader.color;
+            this.p_mat.uniforms["fragment"].value = config.shader.broken;
+            this.p_mat.uniforms["scale"].value = config.shader.scale;
+            this.p_mat.uniforms["displ"].value = config.shader.displ * 0.01;
+            this.p_mat.uniforms["redhell"].value = config.shader.invert;
+        }
+    }
+
+    class Space {
+        constructor(props) {
+            this.name = props.name ? props.name : "Null";
+            this.canvas = props.canvas ? props.canvas : null;
+            this.main();
+        }
+        main() {
+            this.renderer = new THREE.WebGLRenderer({
+                canvas: this.canvas,
+                antialias: true,
+                alpha: true
+            });
+
+            this.clock = new THREE.Clock();
+            this.scene = new THREE.Scene();
+            this.camera = new THREE.PerspectiveCamera(45);
+            this.camera.position.set(0, 0.5, 3);
+            // this.scene.background = new THREE.Color(0x000005);
+            this.control = new Control({ camera: this.camera, canvas: this.canvas });
+            //--
+            this.axesHelper = new THREE.AxesHelper(2);
+            this.axesHelper.position.y = -1.5;
+            //this.scene.add(this.axesHelper);
+            this.renderer.shadowMap.enabled = true;
+            this.renderer.shadowMap.type = THREE.PCFShoftSHadowMap;
+            this.init();
+        }
+        init() {
+            const scene = this.scene;
+            this.particle = new Particles({ scene });
+            //--
+            this.render();
+            this.loop();
+            this.resize();
+        }
+        resize() {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        render() {
+            this.scene.rotation.y = this.clock.getElapsedTime() * config.scene.speed;
+            this.camera.lookAt(this.scene.position);
+            this.camera.updateMatrixWorld();
+            this.renderer.render(this.scene, this.camera);
+            this.control.update();
+            this.particle.render();
+        }
+        loop() {
+            this.render();
+            requestAnimationFrame(this.loop.bind(this));
+        }
+    }
+
+    const canvas = document.querySelector("canvas");
+    const world = new Space({ canvas });
+    const panel = new Panel();
+    window.addEventListener("resize", () => world.resize());
+    window.addEventListener("load", () => world.resize());
+</script>
+<script src="{{ url_for('static', path='/js/win/terminal.js') }}"></script>
+<script src="{{ url_for('static', path='/js/win/hex-dump.js') }}"></script>
+<script src="{{ url_for('static', path='/js/ws-reload.js') }}"></script>
+<script>
+    if (window.location.pathname.endsWith("arcade.html")) {
+        // Play ending sfx
+        const sfx = new Audio("sfx/win.mp3");
+        sfx.play();
+    }
+</script>
+</body>
+</html>

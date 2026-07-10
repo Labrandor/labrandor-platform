@@ -1,0 +1,184 @@
+.child-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: none;              /* hidden by default */
+  place-items: center;
+  background: rgba(0,0,0,.55);
+  z-index: 10;                /* above folder contents */
+}
+
+.roe-modal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: .875rem;
+  transform: translate(-50%, -50%);
+  width: 875px;
+  height: 520px;
+  background-color: rgba(30, 26, 24, 0.7);
+  border: 1px solid #2DE2E6;
+  box-shadow: 0 0 20px #2DE2E6;
+  border-radius: 5px;
+  padding: 0.9375rem;
+  backdrop-filter: blur(8px);
+  margin: 0;
+}
+
+.child-modal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: .875rem;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  min-width: 50%;
+  max-width: 90%;
+  max-height: 80%;
+  background-color: rgba(30, 26, 24, 0.7);
+  border: 1px solid #2DE2E6;
+  box-shadow: 0 0 20px #2DE2E6;
+  border-radius: 5px;
+  padding: 0.9375rem;
+  backdrop-filter: blur(8px);
+  margin: 0;
+}
+/* .child-modal-card header,
+.child-modal-card main, */
+.child-modal-card footer { 
+  margin-top: -10px;
+}
+
+.challenge-child-modal-close-btn {
+  height: 30px;
+  width: 75px;
+  background: none;
+  color: #ccc;
+  border: 1px solid var(--panel-border);
+  cursor: pointer;
+}
+
+.folder {
+  margin-top:45px;
+  margin-left:20px;
+  margin-right:20px;
+  padding: 10px;
+  /* background-color: none; */
+  position: relative;
+  width: 130px;
+  height: 92px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #14e8ff;
+  box-shadow: 5px 5px 5px 0px #14e8ff;
+  /* transition: box-shadow 0.3s ease-in-out; */
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.folder-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.folder-tab {
+    position: absolute;
+    height: 10px;
+    left: 0;
+    bottom: 100%;
+    display: block;
+    width: 40%;
+    border-top-left-radius: 8px;
+    background-color: #14e8ff;
+}
+
+.folder-tab::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(100% - 10px);
+  border-bottom: 10px solid #14e8ff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.folder:hover {
+    box-shadow: 5px 5px 5px 0px #FA26F7 !important;
+    border: 1px solid #FA26F7;
+}
+
+.folder:hover .folder-tab {
+    position: absolute;
+    height: 10px;
+    left: 0;
+    bottom: 100%;
+    display: block;
+    width: 40%;
+    border-top-left-radius: 8px;
+    background-color: #FA26F7;
+}
+
+.folder:hover .folder-tab::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc(100% - 10px);
+  border-bottom: 10px solid #FA26F7;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+ 
+/* Modal background */
+.modal {
+  display: none; /* Hidden by default */
+  position: absolute;
+  z-index: 1000; /* On top of everything */
+  margin: auto;
+  top: 5%;
+  left: 2.5%;
+  width: 95%;
+  height: 90%;
+  overflow: hidden; /* No scrolling outside modal */
+  background-color: rgba(0, 0, 0, 0.9); /* Overlay */
+  border: 1px solid var(--panel-border);
+  border-radius: 5px;
+  padding: 0.9375rem;
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+/* Modal content box */
+.modal-content {
+  padding: 0.625rem;
+  height: calc(100% - 31px);
+  /* overflow-y: auto; */
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Scrollable menu area */
+.scrollable {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* height: auto; */
+  height: 98%;
+  overflow: hidden;
+  /* overflow-y: auto; */
+  border: 1px solid #ccc;
+  padding: 5px;
+  padding-bottom: 25px;
+}
+
+/* Close button (X) */
+.close {
+  position: absolute;
+  top: 1px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}

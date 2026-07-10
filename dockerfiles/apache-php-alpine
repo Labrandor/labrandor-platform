@@ -1,0 +1,47 @@
+FROM alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+
+# Reuse the same cache ID — no re-download needed
+RUN --mount=type=cache,id=apk-cache-alpine319,sharing=locked,target=/var/cache/apk \
+    printf '%s\n' \
+      'https://dl-cdn.alpinelinux.org/alpine/v3.19/main' \
+      'https://dl-cdn.alpinelinux.org/alpine/v3.19/community' \
+      > /etc/apk/repositories \
+ && apk add --no-network --cache-dir /var/cache/apk \
+      apache2 \
+      php82 php82-apache2 php82-session \
+      php82-mysqli php82-pdo_mysql \
+	  php82-fileinfo
+
+# Remove default index.html
+RUN rm -f /var/www/localhost/htdocs/index.html
+
+# Make sure index.php is treated as a default document (optional, but handy)
+RUN echo 'DirectoryIndex index.php index.html' > /etc/apache2/conf.d/dirindex.conf
+RUN echo 'upload_tmp_dir = /var/www/localhost/htdocs/upload' >> /etc/php82/php.ini
+
+# Ensure upload dir exists and is writable by Apache
+RUN mkdir -p /var/www/localhost/htdocs/uploads \
+ && chown -R apache:apache /var/www/localhost/htdocs/uploads \
+ && chmod 755 /var/www/localhost/htdocs/uploads
+ 
+# Enable AllowOverride All on swagger folder for API challenges
+RUN printf '\n<Directory "/var/www/localhost/htdocs/swagger">\n  AllowOverride All\n  Require all granted\n</Directory>\n' \
+    >> /etc/apache2/httpd.conf
+	
+# Enable AllowOverride All on API folder for API challenges
+RUN printf '\n<Directory "/var/www/localhost/htdocs/api">\n  AllowOverride All\n  Require all granted\n</Directory>\n' \
+    >> /etc/apache2/httpd.conf
+	
+# Enable mod_rewrite (uncomment the LoadModule line in /etc/apache2/httpd.conf)
+RUN sed -i 's/^#\s*LoadModule rewrite_module modules\/mod_rewrite.so/LoadModule rewrite_module modules\/mod_rewrite.so/' \
+    /etc/apache2/httpd.conf
+
+# Copy your website files
+# (For Alpine’s Apache, the default webroot is /var/www/localhost/htdocs)
+COPY . /var/www/localhost/htdocs/
+
+# Remove the dockerfile from the webroot
+RUN rm -f /var/www/localhost/htdocs/apache-php-alpine
+
+EXPOSE 80
+CMD ["httpd", "-D", "FOREGROUND"]

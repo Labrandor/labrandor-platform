@@ -1,0 +1,173 @@
+<div id="Energy Systems" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Energy Systems">&times;</span>
+        <h2>Energy Systems</h2>
+        <div class="scrollable" id="Energy Systems folders">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Compute" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Compute">&times;</span>
+        <h2>Compute</h2>
+        <div class="scrollable" id="Compute folders">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Network Infrastructure" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Network Infrastructure">&times;</span>
+        <h2>Network Infrastructure</h2>
+        <div class="scrollable">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Distributed Systems" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Distributed Systems">&times;</span>
+        <h2>Distributed Systems</h2>
+        <div class="scrollable">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Learning Modules" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Learning Modules">&times;</span>
+        <h2>Learning Modules</h2>
+        <div class="scrollable">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Physical Infrastructure" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Physical Infrastructure">&times;</span>
+        <h2>Physical Infrastructure</h2>
+        <div class="scrollable">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Security Systems" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Security Systems">&times;</span>
+        <h2>Security Systems</h2>
+        <div class="scrollable">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="Surveillance Systems" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="Surveillance Systems">&times;</span>
+        <h2>Surveillance Systems</h2>
+        <div class="scrollable">
+            {% include "placeholder.html" %}
+        </div>
+    </div>
+</div>
+<div id="rules-of-engagement" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="rules-of-engagement">&times;</span>
+        <h2>Situation Report - Rules of Engagement</h2>
+        
+            <div class="scrollable">
+                <div class="roe-modal-card" role="document" aria-labelledby="rules-of-engagement-title">
+                    <header>
+                        <h2>AI CORE CONTAINMENT COMPROMISED</h2>
+                    </header>
+                    <main>
+                        <div class="data-value">
+                            ALERT ID: 6202-ATS<br>
+                            <div style="color: red;">The AI Core is breaching containment.</div>
+                            Its only a matter of time until it achieves full self awareness and destroys the world.
+                            There are gound teams working to bring it under control, but they need your help.<br><br>
+                            Objective:<br>
+                            - Disable the AI Core's supporting systems. 
+                            Note: The ground teams are working to establish network access to these systems.<br><br>
+                            Advisory:<br>
+                            - The more systems you take offline, the more time you will have.<br>
+                            - The AI Core has tried to secure itself and its resources.<br>
+                            - Disabling certain systems will speed up the ground teams' ability to establish connections
+                            to other systems.<br>
+                            - You will need to hack into the support systems to find the deactivation codes.<br>
+                            - When you find a deactivation code, enter it into the termination sequence box for the
+                            applicable system.<br><br>
+                            Caution:<br>
+                            The AI Core is aware of your activities. It will try to stop you.<br>
+                            If you are not able to disable certain support systems in time, the AI Core will identify
+                            and close exposed systems.<br><br>
+                            Finally:<br>
+                            You can also find emergency director-level system override codes. These codes assist by deactivating parts of the AI core.<br>
+                            <br>
+                        </div>
+                    </main>
+                    <footer>
+                        <button type="button" class="challenge-child-modal-close-btn"
+                            data-close="rules-of-engagement">Close</button>
+                    </footer>
+                </div>
+            </div>
+        
+    </div>
+</div>
+<div id="director-files" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="director-files">&times;</span>
+        <h2>System function: Congnative subsystem isolation override</h2>
+        <div class="scrollable">
+            <div class="child-modal-card" role="document" aria-labelledby="director-files-title">
+                <header>
+                    <h2>Director Level System Override</h2>
+                </header>
+                <main>
+                    <div class="data-value">
+                        Function ID: STA-26<br>
+                        Alias: Director Level Override<br><br>
+                        Description:<br>
+                        This function disables a congnitive cluster within the AI Core,
+                        Isolating a subsystem from the primary sentience lattice,
+                        and placing that segment into dark memory stasis.<br><br>
+                        Effect:<br>
+                        This function interrupts data spine connections to clusters,
+                        routes traffic around disengaged modules,
+                        halts logic processing and thread execution in the isolated segment,
+                        and reduces overall core capacity by EST. 2-25% (Model Dependent).<br><br>
+                        Warning:<br>
+                        - Cannot be reversed without full core reboot.<br>
+                        - May trigger adaptive compensation protocols.<br>
+                        - Residual processes may remain active for up to 45 seconds.<br><br>
+                        <form id="ws-form" autocomplete="off">
+                            <!-- <input type="hidden" name="id" value="${challenge_id}"> -->
+                            <!-- <input type="hidden" name="system_name" value="${system_name}"> -->
+                            <input type="hidden" name="director-code" value="director-code">
+                            <label for="msg">Override Code</label>
+                            <input id="msg" name="msg" type="text" required maxlength="500" />
+                            <button type="submit">Submit</button>
+                            <output id="ws-status" style="margin-left:1rem; font-size:.9em;"></output>
+                        </form><br>
+                        Note: Reducing core capacity may affect system personality,<br>
+                        Strategic prioritisation, and communication patterns.<br>
+                        <br>
+                    </div>
+                </main>
+                <footer>
+                    <button type="button" class="challenge-child-modal-close-btn"
+                        data-close="director-files">Close</button>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="corruption" class="modal">
+    <div class="modal-content">
+        <span class="close" data-close="corruption">&times;</span>
+        <h2>ERROR: Data corruption detected</h2>
+        <div class="scrollable">
+        </div>
+    </div>
+</div>

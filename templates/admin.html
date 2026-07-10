@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Controls</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    body { max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { margin-bottom: .25rem; }
+    .status { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; color: #444; }
+    .dot { width: .65rem; height: .65rem; border-radius: 50%; display: inline-block; background: #c0392b; }
+    .dot.ok { background: #2ecc71; }
+    .row { display: flex; gap: .75rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .endpoint { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; color: #666; }
+    .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .75rem; margin: 1rem 0 1.25rem; }
+    button { padding: .85rem 1rem; border-radius: .6rem; border: 1px solid #ddd; cursor: pointer; background: #fafafa; }
+    button:hover { background: #f0f0f0; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .panel { display: grid; grid-template-columns: 1fr auto; gap: .5rem .75rem; align-items: center; margin: .75rem 0 1rem; }
+    label { font-weight: 600; }
+    input[type="password"], input[type="text"] { padding: .6rem .7rem; border: 1px solid #ccc; border-radius: .5rem; width: 100%; }
+    .input-row { display: contents; }
+    .checkbox { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; color: #444; }
+    .log { background: #0b1020; color: #cbd5e1; border-radius: .5rem; padding: .75rem; height: 220px; overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+    .hidden { display: none; }
+    .weak { color: #b91c1c; }
+    .okmsg { color: #15803d; }
+    .muted { color: #6b7280; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <h1>Admin Controls</h1>
+
+  <div class="row">
+    <div class="status" aria-live="polite">
+      <span id="statusDot" class="dot" aria-hidden="true"></span>
+      <span id="statusText">Disconnected</span>
+    </div>
+    <div class="endpoint">WS endpoint: <span id="wsUrl"></span></div>
+  </div>
+
+  <section class="panel" aria-labelledby="secretLabel">
+    <label id="secretLabel" for="secret">Secret</label>
+    <div class="checkbox">
+      <input type="checkbox" id="rememberSecret" />
+      <label for="rememberSecret" style="font-weight:400;">Remember on this device</label>
+    </div>
+    <div class="input-row">
+      <div style="display:flex; gap:.5rem; align-items:center;">
+        <input id="secret" type="password" autocomplete="current-password" placeholder="Enter admin secret…" />
+        <button id="toggleSecret" type="button" aria-pressed="false" title="Show/Hide secret">Show</button>
+      </div>
+      <div id="secretMsg" class="muted">The secret is sent with each command.</div>
+    </div>
+  </section>
+
+  <div class="controls" role="group" aria-label="Admin actions">
+    <button data-action="start_new_game" aria-label="Start new game" disabled>
+      ▶️ Start new game
+    </button>
+    <button data-action="continue_current_game" aria-label="Continue current game" disabled>
+      ⏯️ Continue current game
+    </button>
+    <button data-action="new_challenge" aria-label="New challenge" disabled>
+      🧩 New challenge
+    </button>
+    <button data-action="new_bonus_challenge" aria-label="New bonus challenge" disabled>
+      🎁 New bonus challenge
+    </button>
+    <button data-action="stop_bonus" aria-label="Stop bonus challenges" disabled>
+      🎁 Stop bonus challenges
+    </button>
+    <button data-action="force_flag_found" aria-label="Force flag found" disabled>
+      🚩 Force flag found
+    </button>
+    <button data-action="force_win" aria-label="Force win" disabled>
+      🚩 Force Win 
+    </button>
+    <button data-action="force_lose" aria-label="Force lose" disabled>
+      🚩 Force Lose 
+    </button>
+    <button data-action="remove_time" aria-label="Remove time" disabled>
+      ▶️ Remove 10 min
+    </button>
+    <button data-action="add_time" aria-label="Add time" disabled>
+      ▶️ Add 10 min
+    </button>
+  </div>
+
+  <div class="row" style="margin-bottom:.5rem;">
+    <button id="reconnectBtn" class="hidden">Reconnect</button>
+    <small class="muted">Buttons are enabled only when connected.</small>
+  </div>
+
+  <div class="log" id="log" aria-live="polite"></div>
+
+  <script>
+    // Configuration
+    const WS_PATH = "/ws"; 
+
+    function resolveWsUrl() {
+      const isTls = window.location.protocol === "https:";
+      const scheme = isTls ? "wss" : "ws";
+      const url = `${scheme}://${window.location.host}${WS_PATH}`;
+      document.getElementById("wsUrl").textContent = url;
+      return url;
+    }
+
+    // Elements
+    const secretInput = document.getElementById("secret");
+    const rememberChk = document.getElementById("rememberSecret");
+    const toggleSecretBtn = document.getElementById("toggleSecret");
+    const secretMsg = document.getElementById("secretMsg");
+    const logEl = document.getElementById("log");
+    const dotEl = document.getElementById("statusDot");
+    const statusEl = document.getElementById("statusText");
+    const reconnectBtn = document.getElementById("reconnectBtn");
+    const buttons = Array.from(document.querySelectorAll("button[data-action]"));
+
+    // Load remembered secret, if present
+    const SAVED_SECRET = localStorage.getItem("admin_secret");
+    if (SAVED_SECRET) {
+      secretInput.value = SAVED_SECRET;
+      rememberChk.checked = true;
+      secretMsg.textContent = "Secret loaded from this device.";
+      secretMsg.className = "okmsg";
+    }
+
+    rememberChk.addEventListener("change", () => {
+      if (rememberChk.checked) {
+        localStorage.setItem("admin_secret", secretInput.value || "");
+      } else {
+        localStorage.removeItem("admin_secret");
+      }
+    });
+
+    secretInput.addEventListener("input", () => {
+      if (rememberChk.checked) {
+        localStorage.setItem("admin_secret", secretInput.value || "");
+      }
+      secretMsg.textContent = "The secret is sent with each command.";
+      secretMsg.className = "muted";
+    });
+
+    toggleSecretBtn.addEventListener("click", () => {
+      const showing = secretInput.type === "text";
+      secretInput.type = showing ? "password" : "text";
+      toggleSecretBtn.textContent = showing ? "Show" : "Hide";
+      toggleSecretBtn.setAttribute("aria-pressed", String(!showing));
+    });
+
+    // UI helpers
+    function setConnected(connected) {
+      dotEl.classList.toggle("ok", connected);
+      statusEl.textContent = connected ? "Connected" : "Disconnected";
+      reconnectBtn.classList.toggle("hidden", connected);
+      buttons.forEach(b => b.disabled = !connected);
+    }
+
+    function log(msg, dir = "→") {
+      const time = new Date().toLocaleTimeString();
+      logEl.textContent += `[${time}] ${dir} ${msg}\n`;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // WebSocket
+    let ws = null;
+    let wsUrl = resolveWsUrl();
+    let reconnectTimer = null;
+
+    function connect() {
+      if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
+
+      ws = new WebSocket(wsUrl);
+
+      ws.addEventListener("open", () => {
+        setConnected(true);
+        log("WebSocket connected", "✓");
+      });
+
+      ws.addEventListener("message", (evt) => {
+		const hiddenMTypes = new Set(["tick", "containment_banner"]);
+		try {
+			const data = JSON.parse(evt.data);
+			if (data.type && hiddenMTypes.has(data.type)) {
+			// Skip logging these message types
+			return;
+			}
+			log(`Server: ${evt.data}`, "←");
+		} catch (e) {
+			// If not JSON or malformed, just log as-is
+			log(`Server: ${evt.data}`, "←");
+		}
+        // log(`Server: ${evt.data}`, "←");
+      });
+
+      ws.addEventListener("close", (evt) => {
+        setConnected(false);
+        log(`Closed (${evt.code})`, "x");
+        scheduleReconnect();
+      });
+
+      ws.addEventListener("error", (err) => {
+        log("Error (see console)", "!");
+        console.error("WebSocket error:", err);
+      });
+    }
+
+    function scheduleReconnect() {
+      if (reconnectTimer) return;
+      reconnectTimer = setTimeout(() => {
+        reconnectTimer = null;
+        connect();
+      }, 1500);
+    }
+
+    reconnectBtn.addEventListener("click", () => {
+      log("Manual reconnect requested", "↻");
+      connect();
+    });
+
+    // Sending commands
+    function sendAction(action) {
+      if (!ws || ws.readyState !== WebSocket.OPEN) {
+        log("Not connected; cannot send.", "!");
+        return;
+      }
+      const secret = (secretInput.value || "").trim();
+      if (!secret) {
+        secretMsg.textContent = "Secret is empty — command not sent.";
+        secretMsg.className = "weak";
+        log("Blocked: empty secret", "!");
+        return;
+      }
+      const payload = {
+        type: "admin_command",
+        action, // e.g. "start_new_game"
+        secret, // sent with each message
+        ts: Date.now()
+      };
+      const text = JSON.stringify(payload);
+      ws.send(text);
+	  // Hiding 'secret' in log output.
+	  const payload_log = {
+        type: "admin_command",
+        action,
+        ts: Date.now()
+      };
+	  const log_text = JSON.stringify(payload_log);
+      log(log_text, "→");
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => sendAction(btn.dataset.action));
+    });
+
+    connect();
+  </script>
+</body>
+</html>

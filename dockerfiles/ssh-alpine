@@ -1,0 +1,130 @@
+FROM alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+
+# -------------------------------
+# Packages with local APK cache (offline-first, online fallback)
+# -------------------------------
+RUN --mount=type=cache,id=apk-cache-alpine319,sharing=locked,target=/var/cache/apk \
+    set -eux; \
+    printf '%s\n' \
+      'https://dl-cdn.alpinelinux.org/alpine/v3.19/main' \
+      'https://dl-cdn.alpinelinux.org/alpine/v3.19/community' \
+      > /etc/apk/repositories; \
+    apk add --no-network --cache-dir /var/cache/apk \
+      openssh python3 bash shadow sudo py3-websocket-client || \
+    { apk add --update --no-progress --cache-dir /var/cache/apk \
+        openssh python3 bash shadow sudo py3-websocket-client; }
+
+# Writable log directory for non-root users
+ENV SSH_NOTIFY_LOG_DIR="/tmp"
+
+# -------------------------------
+# Notifier (Python) — hard-coded WS URL, LF endings, 0755 perms
+# -------------------------------
+RUN set -eu; \
+    install -d /usr/local/bin; \
+    printf '%s\n' \
+'#!/usr/bin/env python3' \
+'import json, os, socket, sys' \
+'from datetime import datetime, timezone' \
+'' \
+'DEFAULT_WS_URL = "ws://172.17.0.1:8000/ws"' \
+'LOG = os.environ.get("SSH_NOTIFY_LOG_DIR", "/tmp")' \
+'' \
+'def log(msg):' \
+'    try:' \
+'        with open(f"{LOG}/ssh-login-debug.log","a") as f:' \
+'            f.write(f"{datetime.now(timezone.utc).isoformat()} {msg}\\n")' \
+'    except Exception:' \
+'        pass' \
+'' \
+'try:' \
+'    from websocket import create_connection' \
+'except Exception as e:' \
+'    log(f"import websocket failed: {e}")' \
+'    sys.exit(0)' \
+'' \
+'def main():' \
+'    url = (os.environ.get("WEBSOCKET_URL","").strip() or DEFAULT_WS_URL)' \
+'    if not url:' \
+'        log("No WebSocket URL available; skipping")' \
+'        return' \
+'    payload = {' \
+'        "type": "ssh_login",' \
+'        "ts_utc": datetime.now(timezone.utc).isoformat(),' \
+'        "user": os.environ.get("USER") or os.environ.get("LOGNAME"),' \
+'        "remote": (os.environ.get("SSH_CONNECTION") or "").split(),' \
+'        "hostname": socket.gethostname(),' \
+'        "original_command": os.environ.get("SSH_ORIGINAL_COMMAND") or "",' \
+'    }' \
+'    try:' \
+'        log(f"connecting to {url}")' \
+'        ws = create_connection(url, timeout=5)' \
+'        log("connected; sending payload")' \
+'        ws.send(json.dumps(payload))' \
+'        try:' \
+'            ws.send("ping")' \
+'        except Exception as e:' \
+'            log(f"secondary ping failed: {e}")' \
+'        ws.close()' \
+'        log("done")' \
+'    except Exception as e:' \
+'        log(f"notify failed: {e}")' \
+'' \
+'if __name__ == "__main__":' \
+'    main()' \
+    > /usr/local/bin/notify_ws.py; \
+    chmod 755 /usr/local/bin/notify_ws.py
+
+# -------------------------------
+# Wrapper executed for ALL SSH sessions via ForceCommand
+# -------------------------------
+RUN set -eu; \
+    printf '%s\n' \
+'#!/bin/sh' \
+'LOG_DIR=${SSH_NOTIFY_LOG_DIR:-/tmp}' \
+'mkdir -p "$LOG_DIR" 2>/dev/null || true' \
+'echo $(date -u +%FT%TZ) wrapper-fired >> "$LOG_DIR/ssh-wrapper.log" 2>/dev/null || true' \
+'(/usr/bin/python3 /usr/local/bin/notify_ws.py >> "$LOG_DIR/ssh-login-debug.log" 2>&1 &) || true' \
+'if [ -n "$SSH_ORIGINAL_COMMAND" ]; then' \
+'  exec sh -lc "$SSH_ORIGINAL_COMMAND"' \
+'fi' \
+'USER_SHELL=$(getent passwd "$USER" | cut -d: -f7)' \
+'[ -z "$USER_SHELL" ] && USER_SHELL="/bin/sh"' \
+'exec "$USER_SHELL" -l' \
+    > /usr/local/bin/notify_and_exec.sh; \
+    chmod 755 /usr/local/bin/notify_and_exec.sh; \
+    chmod 755 /usr/local/bin
+
+# -------------------------------
+# SSHD setup + config (ForceCommand via shell)
+# -------------------------------
+RUN set -eu; \
+    mkdir -p /var/run/sshd; \
+    ssh-keygen -A; \
+    sed -i \
+      -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/' \
+      -e 's/^#\?PermitRootLogin.*/PermitRootLogin no/' \
+      -e 's/^#\?UsePAM.*/UsePAM no/' \
+      /etc/ssh/sshd_config; \
+    grep -q '^ClientAliveInterval' /etc/ssh/sshd_config || echo 'ClientAliveInterval 300' >> /etc/ssh/sshd_config; \
+    grep -q '^ClientAliveCountMax' /etc/ssh/sshd_config || echo 'ClientAliveCountMax 2' >> /etc/ssh/sshd_config; \
+    grep -q '^AllowTcpForwarding' /etc/ssh/sshd_config || echo 'AllowTcpForwarding no' >> /etc/ssh/sshd_config; \
+    grep -q '^X11Forwarding' /etc/ssh/sshd_config || echo 'X11Forwarding no' >> /etc/ssh/sshd_config; \
+    grep -q '^Subsystem sftp' /etc/ssh/sshd_config || echo 'Subsystem sftp /usr/lib/ssh/sftp-server' >> /etc/ssh/sshd_config; \
+    sed -i '/^ForceCommand /d' /etc/ssh/sshd_config; \
+    printf '\nForceCommand /bin/sh -lc "/usr/local/bin/notify_and_exec.sh"\n' >> /etc/ssh/sshd_config
+
+# -------------------------------
+# Demo user (provide creds at build time)
+# -------------------------------
+ARG NEW_USER=backdoor
+ARG NEW_PASSWORD=N4n0L0ck02
+RUN adduser -D -s /bin/bash "$NEW_USER" && \
+    echo "${NEW_USER}:${NEW_PASSWORD}" | chpasswd && \
+    adduser "$NEW_USER" wheel || true && \
+    sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+
+COPY code.txt /home/backdoor/
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd","-D","-e"]
