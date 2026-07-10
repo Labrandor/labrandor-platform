@@ -48,7 +48,7 @@ ALLOWED: Dict[str, Set[str]] = {
 # Note: Each module that queries the database has its own user, with restricted permissions for its applicable tables. 
 
 # Keys that may be used specifically to unlock the FIRST gate
-FIRST_GATE_KEYS: Set[str] = {'git', 'config.old', 'users.json', 'env', 'log', 'sqli', 'robots'}
+FIRST_GATE_KEYS: Set[str] = {'config.old', 'users.json', 'env', 'log', 'sqli', 'robots'} # Add 'git' to this list, if you unzip the git.zip in the 'key' folder.
 NON_FIRST_KEYS: Set[str]  = set(KEYS) - FIRST_GATE_KEYS
 
 # =============================
