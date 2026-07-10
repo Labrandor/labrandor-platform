@@ -64,11 +64,11 @@ echo mt_rand(0, 9); ?></span></div>
                                     <li class="cursor-hover" data-counter="2"></li>
                                 </ul>
                                 <ul class="carousel">
-                                    <li class="item item1"><img src="./image_2.png" alt="" style="opacity: 0;"></li>
-                                    <li class="item item2"><img src="./image_1.png" alt="" style="opacity: 1;">
+                                    <li class="item item1"><img src="./image_2.jpg" alt="" style="opacity: 0;"></li>
+                                    <li class="item item2"><img src="./image_1.jpg" alt="" style="opacity: 1;">
                                         <div class="canvas-wrap"><canvas width="770" height="562" style="width: 770px; height: 562px; display: none;"></canvas></div>
                                     </li>
-                                    <li class="item item3"><img src="./logo.png" alt="" style="opacity: 0;"></li>
+                                    <li class="item item3"><img src="./logo.jpg" alt="" style="opacity: 0;"></li>
                                 </ul>
                             </div>
                         </div>
@@ -152,10 +152,10 @@ echo mt_rand(0, 9); ?></span></div>
                     </div>
                     <div class="max-width">
                         <div class="mosaic-wrapper">
-						<img src="./image_3.png" alt="">
-						<img src="./image_4.png" alt="">
-						<img src="./image_5.png" alt="">
-						<img src="./image_6.png" alt="">						
+						<img src="./image_3.jpg" alt="">
+						<img src="./image_4.jpg" alt="">
+						<img src="./image_5.jpg" alt="">
+						<img src="./image_6.jpg" alt="">						
 						</div>
                         <div style="display:none;" class="img-wrapper mobile-wrapper">
 						</div>
@@ -169,7 +169,7 @@ echo mt_rand(0, 9); ?></span></div>
         <div class="pagination-inner max-width"><span class="mark">Future Projects</span> <a href="https://">
                 <h3 class="project-name cursor-hover">NEW DEVELOPMENTS</h3>
             </a>
-            <div class="thumbnail-wrapper"><a href="https://"><img class="thumbnail cursor-hover" src="./image_7.png" alt="thumbnail for next project"></a><a href="https://"><img class="thumbnail cursor-hover" src="./image_8.png" alt="thumbnail for next project"></a></div>
+            <div class="thumbnail-wrapper"><a href="https://"><img class="thumbnail cursor-hover" src="./image_7.jpg" alt="thumbnail for next project"></a><a href="https://"><img class="thumbnail cursor-hover" src="./image_8.jpg" alt="thumbnail for next project"></a></div>
             <div class="btn-wrapper"><a class="btn-big cursor-hover" href="#">
                     <div class="back"></div>
                     <div class="front"><img class="btn-arrow btn-arrow-left" width="20" height="20" src="./assets/img/c/arrow-small-black.svg" aria-hidden="true" alt=""> <span class="text">See all projects</span> <img class="btn-arrow btn-arrow-right" width="20" height="20" src="./assets/img/c/arrow-small-black.svg" aria-hidden="true" alt=""></div>

@@ -64,7 +64,7 @@ include 'header.php';
                             </div>
                             <div class="bottom">
                                 <div class="column">
-                                    <img src="./ceo.png" style="max-width:500px;" alt="CEO">
+                                    <img src="./ceo.jpg" style="max-width:500px;" alt="CEO">
                                 </div>
                                 <div class="column">
                                     <div class="mark">Chief Executive Officer</div>
@@ -73,7 +73,7 @@ include 'header.php';
                             </div>
                             <div class="bottom">
                                 <div class="column">
-                                    <img src="./coo.png" style="max-width:500px;" alt="COO">
+                                    <img src="./coo.jpg" style="max-width:500px;" alt="COO">
                                 </div>
                                 <div class="column">
                                     <div class="mark">Chief Operations Officer</div>
@@ -82,7 +82,7 @@ include 'header.php';
                             </div>
                             <div class="bottom">
                                 <div class="column">
-                                    <img src="./cto.png" style="max-width:500px;" alt="CTO">
+                                    <img src="./cto.jpg" style="max-width:500px;" alt="CTO">
                                 </div>
                                 <div class="column">
                                     <div class="mark">Chief Technology Officer</div>
@@ -91,7 +91,7 @@ include 'header.php';
                             </div>
                             <div class="bottom">
                                 <div class="column">
-                                    <img src="./ciso.png" style="max-width:500px;" alt="CISO">
+                                    <img src="./ciso.jpg" style="max-width:500px;" alt="CISO">
                                 </div>
                                 <div class="column">
                                     <div class="mark">Chief Information Security Officer</div>
@@ -100,7 +100,7 @@ include 'header.php';
                             </div>
                             <div class="bottom">
                                 <div class="column">
-                                    <img src="./cso.png" style="max-width:500px;" alt="CSO">
+                                    <img src="./cso.jpg" style="max-width:500px;" alt="CSO">
                                 </div>
                                 <div class="column">
                                     <div class="mark">Chief Security Officer</div>
