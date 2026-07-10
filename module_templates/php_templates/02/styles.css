@@ -462,8 +462,8 @@ padding-top: 5px;
     /* width: auto; */
     width: 422px;
     display: inline-block;
-    --bg1: url("./image_1.png");
-    --bg2: url("./image_1.png");
+    --bg1: url("./image_1.jpg");
+    --bg2: url("./image_1.jpg");
 }
 
 /* stack the two image layers for crossfade */

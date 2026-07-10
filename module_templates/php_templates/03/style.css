@@ -733,46 +733,46 @@ h1 {
 
 .ceo {
 	border-radius: 2rem 0rem 0rem 2rem;
-	background-image: url('./ceo.png');
+	background-image: url('./ceo.jpg');
 }
 
 .coo {
-	background-image: url('./coo.png');
+	background-image: url('./coo.jpg');
 }
 
 .cto {
-	background-image: url('./cto.png');
+	background-image: url('./cto.jpg');
 }
 
 .ciso {
-	background-image: url('./ciso.png');
+	background-image: url('./ciso.jpg');
 }
 
 .cso {
 	border-radius: 0rem 2rem 2rem 0rem;
-	background-image: url('./cso.png');
+	background-image: url('./cso.jpg');
 }
 
 .item-1 {
 	border-radius: 2rem 0rem 0rem 2rem;
-	background-image: url('./image_1.png');
+	background-image: url('./image_1.jpg');
 }
 
 .item-2 {
-	background-image: url('./image_2.png');
+	background-image: url('./image_2.jpg');
 }
 
 .item-3 {
-	background-image: url('./image_3.png');
+	background-image: url('./image_3.jpg');
 }
 
 .item-4 {
-	background-image: url('./image_4.png');
+	background-image: url('./image_4.jpg');
 }
 
 .item-5 {
 	border-radius: 0rem 2rem 2rem 0rem;
-	background-image: url('./logo.png');
+	background-image: url('./logo.jpg');
 }
 
 .home_link {
