@@ -29,14 +29,14 @@ include 'json.php';
 
             <!--circular progress bar-1-->
             <div class="prog-1" id="rotator">
-                <img class="system_image layer a visible" src="./image_1.png" alt="system image">
-                <img class="system_image layer b hidden" src="./image_2.png" alt="" aria-hidden="true">
-                <img class="system_image layer c hidden" src="./image_3.png" alt="" aria-hidden="true">
-                <img class="system_image layer d hidden" src="./image_4.png" alt="" aria-hidden="true">
-                <img class="system_image layer e hidden" src="./image_5.png" alt="" aria-hidden="true">
-                <img class="system_image layer f hidden" src="./image_6.png" alt="" aria-hidden="true">
-                <img class="system_image layer g hidden" src="./image_7.png" alt="" aria-hidden="true">
-                <img class="system_image layer h hidden" src="./image_8.png" alt="" aria-hidden="true">
+                <img class="system_image layer a visible" src="./image_1.jpg" alt="system image">
+                <img class="system_image layer b hidden" src="./image_2.jpg" alt="" aria-hidden="true">
+                <img class="system_image layer c hidden" src="./image_3.jpg" alt="" aria-hidden="true">
+                <img class="system_image layer d hidden" src="./image_4.jpg" alt="" aria-hidden="true">
+                <img class="system_image layer e hidden" src="./image_5.jpg" alt="" aria-hidden="true">
+                <img class="system_image layer f hidden" src="./image_6.jpg" alt="" aria-hidden="true">
+                <img class="system_image layer g hidden" src="./image_7.jpg" alt="" aria-hidden="true">
+                <img class="system_image layer h hidden" src="./image_8.jpg" alt="" aria-hidden="true">
                 </div>
             </div>
             <!--circular progress bar-1-->
@@ -80,14 +80,14 @@ include 'json.php';
   // preload
   for (let i = 2; i <= total; i++) {
     const img = new Image();
-    img.src = `./image_${i}.png`;
+    img.src = `./image_${i}.jpg`;
   }
 
   function nextIndex(n){ return n % total + 1; }
 
   function showNext() {
     const nextNum = nextIndex(currentNum);
-    const nextSrc = `./image_${nextNum}.png`;
+    const nextSrc = `./image_${nextNum}.jpg`;
 
     // prepare back image layer
     backImg.src = nextSrc;
