@@ -157,7 +157,7 @@ Players are intended to navigate to `http://host-ip-address:8000` to locate the 
 
 The current implementation of Labrandor is within a time-based CTF challenge. By default, players have 2 hours to complete enough dynamically generated challenges before time runs out and the game is over.
 
-The game enginre incorporates a dynamic difficulty scaler, which is intended to balance the distribution of points awarded for finding 'flags' over the intended duration of the game.
+The game engine incorporates a dynamic difficulty scaler, which is intended to balance the distribution of points awarded for finding 'flags' over the intended duration of the game.
 
 Several pre-built 'bonus' or 'secret' challenges will auto-create at different intervals, depending on the game's relative time remaining and how many points have been awarded. These challenges are intended as catch up mechanics for players who are falling behind; however, this feature can be turned off in the admin panel.
 
