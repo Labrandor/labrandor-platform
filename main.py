@@ -1,7 +1,7 @@
 # Copyright (c) 2017-2026 Joel Panther
 # SPDX-License-Identifier: MIT
 # Licensed under the MIT License. 
-
+ 
 # Requires fastapi. Developed using v0.115.11-3
 # Requires NodeJS. Developed using v20.18.1
 # Requires puppeteer. Developed using v24.23.0
